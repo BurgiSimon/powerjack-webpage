@@ -1,0 +1,57 @@
+<section id="get-down" class="sec get-down" data-time="01:45" aria-labelledby="get-down-h" tabindex="-1">
+  <div class="gd__stage stage">
+    <div class="gd__frames">
+      <pj-frame name="k1-break-view" class="gd__f" alt="" sizes="100vw"></pj-frame>
+      <pj-frame name="low-rack" class="gd__f" alt="" sizes="100vw"></pj-frame>
+      <pj-frame name="rack-macro" class="gd__f" alt="" sizes="100vw"></pj-frame>
+      <pj-frame name="cue-tip" class="gd__f gd__f--final" sizes="100vw" alt="In-game frame, first person, down on the break: a bridge hand on the cloth, the cue tip at the cue ball, the rack at the far end."></pj-frame>
+    </div>
+    <div class="gauge" aria-hidden="true"><i class="gauge__rule"></i><i class="gauge__tick"></i><span class="gauge__read">≈ 0.15 m · chin on the cue</span></div>
+    <p class="chip">In-game frames · high and ultra presets <img class="chip__plan" src="media/plans/cue-tip.svg" width="96" height="62" alt=""></p>
+  </div>
+  <div class="gd__copy smudge">
+    <p class="eyebrow">1:45 a.m. · Get down on the shot</p>
+    <h2 id="get-down-h">No aim line. No power bar. Just the cue.</h2>
+    <p>Walk to the table, get down on the shot, set your bridge hand and push the cue with your own mouse hand. Nothing on the screen tells you where the ball will go. Your eyes do.</p>
+    <blockquote><p>“Your hand is the stroke: the faster the push, the harder the hit.”</p></blockquote>
+    <p>Standing, your eye is 0.79 m over the cloth. Down on the shot, chin on the cue, it’s about 0.15. You breathe and you sway, and you’re steadier with a bridge.</p>
+  </div>
+  <div class="gd__side">
+    <div class="gd__controls house" role="group" aria-labelledby="gd-controls-h">
+      <h3 id="gd-controls-h">Controls</h3>
+      <h4>Down on the shot</h4>
+      <dl class="ctl">
+        <div><dt><kbd class="kc">LMB</kbd></dt><dd><b>Hold, draw back, push through</b> <i>Your hand is the stroke: the faster the push, the harder the hit</i></dd></div>
+        <div><dt><kbd class="kc">RMB</kbd></dt><dd><b>Drag to move the bridge</b> <i>Where the tip meets the ball: follow, draw, english</i></dd></div>
+        <div><dt><kbd class="kc">Shift</kbd></dt><dd><b>Hold your breath</b> <i>Steadier for a few seconds, then you gasp</i></dd></div>
+      </dl>
+      <h4>On your feet</h4>
+      <dl class="ctl">
+        <div><dt><kbd class="kc">W</kbd><kbd class="kc">A</kbd><kbd class="kc">S</kbd><kbd class="kc">D</kbd></dt><dd><b>Walk</b></dd></div>
+        <div><dt><kbd class="kc">Mouse</kbd></dt><dd><b>Look around</b></dd></div>
+        <div><dt><kbd class="kc">Wheel</kbd> or <kbd class="kc">Q</kbd></dt><dd><b>Get down on the shot</b></dd></div>
+        <div><dt><kbd class="kc">E</kbd></dt><dd><b>Use what you’re looking at</b> <i>Order at the bar, take a cue off the rack, pick a record</i></dd></div>
+        <div><dt><kbd class="kc">Esc</kbd></dt><dd><b>Pause</b></dd></div>
+      </dl>
+    </div>
+    <div class="take card-ink" data-cursor="push" role="group" aria-labelledby="take-h">
+      <h3 id="take-h">Take the shot</h3>
+      <p class="take__label" id="take-label"><span class="fine">Hold the left button here and push the mouse forward, like a stroke</span><span class="coarse">Press here and push your thumb up, like a stroke.</span></p>
+      <div class="take__pad" role="img" aria-labelledby="take-label"><svg class="take__cue" viewBox="0 0 400 100" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <defs>
+          <linearGradient id="take-shaft" x1="0" y1="0" x2="0" y2="1"><stop offset="0" stop-color="#F0D9AE"/><stop offset=".45" stop-color="#D9B98A"/><stop offset="1" stop-color="#9C7A4E"/></linearGradient>
+          <radialGradient id="take-ivory" cx=".36" cy=".32" r=".75"><stop offset="0" stop-color="#FFFDF6"/><stop offset=".45" stop-color="#EDE3CB"/><stop offset="1" stop-color="#A89C84"/></radialGradient>
+        </defs>
+        <line class="take__cloth" x1="0" y1="63.5" x2="400" y2="63.5"/>
+        <g class="take__stick"><path d="M-60 41.5 296 46.6v6.8L-60 58.5z" fill="url(#take-shaft)"/><path d="M286 46.4h10v7.2h-10z" fill="#EFE9DA"/><path d="M296 46.6h3.2v6.8H296z" fill="#2A5AA8"/></g>
+        <g class="take__ball"><circle cx="314" cy="50" r="13" fill="url(#take-ivory)"/></g>
+      </svg></div>
+      <div class="take__meter" aria-hidden="true"><i class="take__fill"></i><i class="take__peak"></i>
+        <ol class="take__scale"><li style="--v:1.2">soft</li><li style="--v:3">medium</li><li style="--v:4.6">firm</li><li style="--v:6.4">break</li></ol></div>
+      <output class="take__v">0.0 m/s</output>
+      <p class="take__note">The game’s own stroke test pad, from its Settings: the speed your push would give the cue ball with the house cue.<span class="coarse"> On a touch screen the number is only a guess. The game is played with a mouse.</span></p>
+      <button class="take__btn" type="button">Take the shot</button> <p class="take__hint">Or press here for a firm stroke.</p>
+      <p class="take__result" aria-live="polite"></p><p class="stamp take__stamp" aria-hidden="true"></p>
+    </div>
+  </div>
+</section>

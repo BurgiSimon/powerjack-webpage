@@ -1,0 +1,44 @@
+/* The storefront of the Powerjack, seen from Fulton St.: walnut frame, glass, mist, signs and gold leaf.
+   Shared by #fulton (the arrival) and #last-call (outside again). */
+
+@layer storefront {
+.storefront { position: absolute; inset: 0; }
+.storefront__frame { position: absolute; inset: 0; z-index: 1; pointer-events: none; border: solid transparent; border-width: 2.4vw 2.4vw 0;
+  border-image: linear-gradient(135deg, var(--walnut), var(--beam) 45%, var(--walnut) 70%, var(--beam)) 1;
+  box-shadow: inset 0 0 0 1px rgba(201, 165, 90, .18), inset 6px 6px 18px rgba(0, 0, 0, .55); }
+:where(.storefront__frame) i { position: absolute; display: block;
+  background: linear-gradient(var(--beam), var(--walnut) 40%, var(--beam)); box-shadow: 0 4px 10px rgba(0, 0, 0, .5), inset 0 1px 0 rgba(201, 165, 90, .25); }
+.storefront__transom { left: 0; right: 0; top: 16%; height: 1.2vw; }
+.storefront__mullion { left: calc(70vw - 2.4vw); top: 0; bottom: 0; width: 2vw;
+  background: linear-gradient(90deg, var(--beam), var(--walnut) 45%, var(--beam)); }
+.storefront__kick { left: -2.4vw; right: -2.4vw; bottom: 0; height: 12svh; border-top: 3px solid var(--brass);
+  background: linear-gradient(var(--walnut), var(--beam) 70%, #2A1C13);
+  box-shadow: inset 0 1px 0 rgba(255, 220, 160, .18), inset 0 10px 18px -10px rgba(0, 0, 0, .6); }
+.storefront__mist { position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(to top, rgba(107, 87, 69, .55), rgba(107, 87, 69, .25) 35%, transparent 55%); }
+
+/* the signs hang inside the glass (the glass shader takes them over when it runs) */
+.storefront__sign { position: absolute; height: auto; pointer-events: none; }
+.storefront__sign--beer { left: 45vw; top: 65%; width: 20vw; }   /* clear of the sidewalk copy and the table */
+.storefront__sign--open { left: calc(84.8vw - 5vw); top: 30%; width: 10vw; }
+
+/* gold leaf with a dark sign-painter keyline, so it holds over any frame */
+.leaf { margin: -.12em 0 -.3em; padding: .12em 0 .3em;   /* clip:text paints only inside the box: room for the j's tail */
+  font: 900 var(--fs-mega)/.92 var(--f-display); font-variation-settings: 'SOFT' 100; letter-spacing: -.015em;
+  background: var(--foil); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent;
+  /* the sign-painter's dark keyline as tight shadows: text-stroke would trace the variable font's overlapping contours */
+  filter: drop-shadow(0 0 .6px rgba(23, 17, 12, .95)) drop-shadow(0 0 1px rgba(23, 17, 12, .85)) drop-shadow(0 2px 6px rgba(12, 7, 3, .6)); }
+@media (forced-colors: active) {
+  .leaf { background: none; -webkit-text-fill-color: CanvasText; color: CanvasText; -webkit-text-stroke: 0; filter: none; }
+}
+
+/* portrait phones see only the door */
+@media (max-width: 899.98px) and (orientation: portrait) {
+  .storefront__frame { border-width: 4vw 4vw 0; }
+  .storefront__transom { top: 12%; height: 2.4vw; }
+  .storefront__mullion, .storefront__sign--beer { display: none; }
+  .storefront__kick { left: -4vw; right: -4vw; height: 9svh; }
+  .storefront__sign--open { left: 33vw; top: 40%; width: 34vw; }
+}
+}

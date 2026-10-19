@@ -1,0 +1,55 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>The line went dead · Powerjack</title>
+<meta name="robots" content="noindex">
+<meta name="theme-color" content="#17110C"><meta name="color-scheme" content="dark">
+<link rel="icon" href="%SITE_URL%favicon.svg" type="image/svg+xml">
+<style>
+/* the corner TV's own test card (tv.ts), drawn in CSS; system fonts only, nothing relative, so it works at any depth */
+:root { color-scheme: dark; --ink: #17110C; --cream: #EFE4CC; --cream-dim: #B9AC92; --amber: #E8A23A; --brass: #C9A55A; --neon: #FF4A2A;
+  --display: Georgia, 'Times New Roman', serif; --hud: 'Arial Narrow', 'Roboto Condensed', Arial, sans-serif; --paper: 'Courier New', Courier, monospace; }
+* { box-sizing: border-box; }
+html { background: var(--ink); }
+body { margin: 0; min-height: 100svh; display: grid; place-items: center; padding: 3rem 16px; background: radial-gradient(ellipse 80% 60% at 50% 30%, rgba(232, 162, 58, .08), transparent 70%), var(--ink);
+  color: var(--cream); font: 400 1.0625rem / 1.55 var(--display); text-align: center; }
+main { width: min(36rem, 100%); }
+.tv { position: relative; width: min(26rem, 100%); aspect-ratio: 4 / 3; margin: 0 auto 2.5rem; border-radius: 18px / 24px; overflow: hidden; background: #7a7a7a;
+  box-shadow: 0 0 0 10px #2a211a, 0 0 0 12px #4a3a2c, 0 30px 60px rgba(0, 0, 0, .6), inset 0 0 60px rgba(0, 0, 0, .55); }
+.tv__circle { position: absolute; left: 50%; top: 42%; width: 58%; aspect-ratio: 1; translate: -50% -50%; border-radius: 50%; border: 2px solid #eee;
+  background: repeating-conic-gradient(#8c8c8c 0 30deg, #666 30deg 60deg); }
+.tv__call { position: absolute; left: 50%; top: 42%; translate: -50% -50%; margin: 0; padding: .35em .9em; background: #111; color: #eee; font: 700 1.25rem / 1 var(--paper); letter-spacing: .04em; }
+.tv__steps { position: absolute; left: 10%; right: 10%; bottom: 9%; height: 15%; display: flex; }
+.tv__steps i { flex: 1; }
+.eyebrow { margin: 0 0 .75rem; font: 600 .75rem / 1.2 var(--hud); letter-spacing: .22em; text-transform: uppercase; color: var(--brass); }
+h1 { margin: 0 0 1rem; font: 700 clamp(2.25rem, 1.4rem + 3.8vw, 4rem) / 1.02 var(--display); letter-spacing: -.01em; }
+p { margin: 0 0 1rem; }
+.sub { display: inline-block; margin: .5rem 0 1.75rem; padding: .6rem 1.4rem; background: radial-gradient(ellipse at 50% 55%, rgba(12, 7, 3, .64), transparent 72%);
+  font: italic 400 1.375rem / 1.3 var(--display); }
+.sub__who { display: block; font: 700 .8125rem / 1.4 var(--hud); font-style: normal; letter-spacing: .14em; text-transform: uppercase; color: var(--amber); }
+.btn { display: inline-flex; align-items: center; min-height: 44px; padding: .6rem 1.4rem; border: 1px solid var(--brass); border-radius: 2px; background: rgba(23, 17, 12, .88);
+  color: var(--cream); font: 700 .8125rem / 1 var(--hud); letter-spacing: .14em; text-transform: uppercase; text-decoration: none; }
+.btn:hover { background: var(--brass); color: var(--ink); }
+:focus-visible { outline: 2px solid var(--neon); outline-offset: 3px; box-shadow: 0 0 14px rgba(255, 74, 42, .45); }
+.fine { margin: 2.5rem 0 0; font: 400 .8125rem / 1.5 var(--paper); letter-spacing: .06em; text-transform: uppercase; color: var(--cream-dim); }
+@media (forced-colors: active) { .tv { forced-color-adjust: none; } .btn { border-color: ButtonText; } }
+</style>
+</head>
+<body>
+<main>
+  <div class="tv" aria-hidden="true">
+    <div class="tv__circle"></div>
+    <p class="tv__call">WPJK 9</p>
+    <div class="tv__steps"><i style="background:#000"></i><i style="background:#222"></i><i style="background:#444"></i><i style="background:#666"></i><i style="background:#888"></i><i style="background:#aaa"></i><i style="background:#ccc"></i><i style="background:#eee"></i></div>
+  </div>
+  <p class="eyebrow">WPJK-TV 9 · Chicago</p>
+  <h1>The line went dead.</h1>
+  <p>There’s no table at this address. The Powerjack is at 1414 W. Fulton St.</p>
+  <p class="sub"><span class="sub__who">Jack</span> Scratch. That’ll cost you.</p>
+  <p><a class="btn" href="%SITE_URL%">Back to the table</a></p>
+  <p class="fine">This concludes our broadcast day · Good night</p>
+</main>
+</body>
+</html>

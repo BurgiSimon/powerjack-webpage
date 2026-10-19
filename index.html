@@ -1,0 +1,149 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Powerjack: first-person pool in a Chicago tavern, 1976</title>
+<meta name="description" content="First-person pool in a Chicago corner tavern at 1:40 a.m., 1976. No aim line, no power bar, just the cue in your hand. A browser game in development.">
+<link rel="canonical" href="%SITE_URL%" vite-ignore>
+<meta name="theme-color" content="#17110C"><meta name="color-scheme" content="dark">
+<meta property="og:type" content="website"><meta property="og:site_name" content="Powerjack">
+<meta property="og:title" content="Powerjack · Last call, 1976">
+<meta property="og:description" content="First-person pool in a Chicago corner tavern at 1:40 a.m., 1976. In development.">
+<meta property="og:url" content="%SITE_URL%"><meta property="og:image" content="%SITE_URL%og.jpg" vite-ignore>
+<meta property="og:image:width" content="1200"><meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="The POWERJACK neon over the jukebox in the game's corner tavern, with the matchbook title card.">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="icon" href="favicon-32.png" sizes="32x32" type="image/png">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(min-width: 900px), (orientation: landscape)"
+  imagesrcset="media/frames/room-wide-960.avif 960w, media/frames/room-wide-1920.avif 1920w" imagesizes="100vw">
+<link rel="preload" as="image" type="image/avif" fetchpriority="high" media="(max-width: 899.98px) and (orientation: portrait)"
+  imagesrcset="media/frames/portrait-table-540.avif 540w, media/frames/portrait-table-1080.avif 1080w" imagesizes="100vw">
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"VideoGame","name":"Powerjack","url":"%SITE_URL%",
+ "description":"First-person pool in a Chicago corner tavern at 1:40 a.m., 1976. In development.","genre":["Sports","Billiards"],
+ "gamePlatform":"Web browser (desktop, mouse and keyboard)","playMode":["SinglePlayer","MultiPlayer"],"image":"%SITE_URL%og.jpg"}</script>
+<script>(function(){var d=document.documentElement,rm=false,seen=false;try{if(localStorage.getItem('pj-still')==='1')d.classList.add('still')}catch(e){}
+rm=matchMedia('(prefers-reduced-motion: reduce)').matches||d.classList.contains('still');
+try{seen=sessionStorage.getItem('pj-struck')==='1';sessionStorage.setItem('pj-struck','1')}catch(e){}
+if(rm||seen)d.classList.add('no-strike')})();</script>
+<style>
+/* critical: the strike, the game's own loading match (index.html of the game), lengths in em so --len scales it anywhere */
+.strike { position: fixed; inset: 0; z-index: var(--z-loader, 100); display: grid; place-content: center; justify-items: center; gap: 7vmin;
+  background: #000; --p: 0; animation: strike-out .3s 2.2s forwards; }
+.no-strike .strike { display: none; }
+@keyframes strike-out { to { opacity: 0; visibility: hidden; } }
+.strike.has-hole { background: transparent; }
+.strike__dark { position: absolute; inset: 0; width: 100%; height: 100%; }
+.strike.out { opacity: 0; transition: opacity .3s; pointer-events: none; }
+.match { position: relative; font-size: calc(var(--len, 54vmin) / 54); width: 54em; height: 1.5em; --front: calc((1 - var(--p, 0)) * 91%); }
+.m-stick { position: absolute; left: 0; top: 0; bottom: 0; width: var(--front); border-radius: .25em 0 0 .25em;
+  background: linear-gradient(180deg, #e6d9bb, #d3c29d 60%, #b9a77f); box-shadow: 0 .2em .4em rgba(0, 0, 0, .6); }
+.m-char { position: absolute; left: var(--front); right: 7%; top: 18%; bottom: 22%; border-radius: 0 .4em .4em 0;
+  background: linear-gradient(90deg, #ff9b3c, #7a2c10 .5em, #2a1d17 1.4em, #1a1412 60%, #2b2420); transform: rotate(-1.2deg); transform-origin: left center; }
+.m-head { position: absolute; right: 0; top: -55%; width: 9%; height: 210%; border-radius: 50% 46% 46% 50% / 50%;
+  background: radial-gradient(circle at 40% 35%, #c1543a, #7a1d12 55%, #4a100a); transition: background .4s; }
+[style*="--p"] .m-head { background: radial-gradient(circle at 40% 35%, #3b302b, #161110 65%); }
+.m-flame { position: absolute; left: var(--front); bottom: 30%; width: 4.4em; height: 9em; transform: translateX(-38%); transform-origin: 50% 100%; transition: opacity .5s, height .5s; }
+.m-flame::before { content: ''; position: absolute; inset: -60% -150%; background: radial-gradient(closest-side, rgba(255, 140, 40, .22), rgba(255, 110, 20, .07) 55%, transparent); }
+.m-flame i { position: absolute; inset: 0; border-radius: 50% 50% 46% 46% / 64% 64% 36% 36%;
+  background: radial-gradient(ellipse 40% 34% at 50% 84%, rgba(90, 120, 255, .85), transparent 70%), radial-gradient(ellipse 34% 46% at 50% 70%, #fff6dc 0 30%, #ffd57a 52%, rgba(255, 140, 40, .9) 75%, rgba(255, 90, 20, 0) 100%);
+  filter: blur(.25em); animation: pj-flick 1.7s infinite; transform-origin: 50% 100%; }
+.out .m-flame, .done .m-flame, .match.done .m-flame { opacity: 0; height: 2em; }
+@keyframes pj-flick { 0%, 100% { transform: scale(1, 1) skewX(0); } 13% { transform: scale(.96, 1.05) skewX(-2deg); } 29% { transform: scale(1.03, .95) skewX(1.5deg); }
+  47% { transform: scale(.98, 1.07) skewX(-1deg); } 63% { transform: scale(1.02, .97) skewX(2.5deg); } 81% { transform: scale(.97, 1.03) skewX(-1.5deg); } }
+@media (prefers-reduced-motion: reduce) { .m-flame i { animation: none; } }
+.load-t { position: relative; margin: 0; min-height: 1.4em; font: 600 clamp(13px, 1.6vmin, 20px) / 1.4 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  letter-spacing: .22em; text-transform: uppercase; color: #8d826d; }
+</style>
+<noscript><style>.strike { display: none; }</style></noscript><!-- no script, no honest progress: skip the match -->
+<script type="module" src="/src/main.ts"></script>
+</head>
+<body>
+<div class="strike" role="progressbar" aria-label="Lighting the lamps" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+  <canvas class="strike__dark" aria-hidden="true"></canvas>
+  <div class="match" aria-hidden="true"><div class="m-stick"></div><div class="m-char"></div><div class="m-head"></div><div class="m-flame"><i></i></div></div>
+  <p class="load-t">Lighting the lamps</p>
+</div>
+<a class="skip" href="#main">Skip to the page</a>
+<header class="hdr">
+  <a class="hdr__mark paper" href="#fulton">Powerjack</a>
+  <div class="hdr__right">
+    <button class="hdr__sound strip-btn" type="button" aria-pressed="false" aria-label="Sound"><span class="strip-btn__k" aria-hidden="true">Sound</span> <span class="strip-btn__v" aria-hidden="true"></span></button>
+    <button class="hdr__menu" type="button" commandfor="matchbook" command="show-modal" aria-haspopup="dialog">
+      <svg class="clockface" viewBox="0 0 36 36" aria-hidden="true"><circle class="clockface__face" cx="18" cy="18" r="16.6"/>
+        <path class="clockface__ticks" d="M18 5.8V3M24.7 6.4l.8-1.39M29.6 11.3l1.39-.8M30.2 18H33M29.6 24.7l1.39.8M24.7 29.6l.8 1.39M18 30.2V33M11.3 29.6l-.8 1.39M6.4 24.7l-1.39.8M5.8 18H3M6.4 11.3l-1.39-.8M11.3 6.4l-.8-1.39"/>
+        <line class="clockface__h" x1="18" y1="19.5" x2="18" y2="10.5" transform="rotate(50 18 18)"/>
+        <line class="clockface__m" x1="18" y1="20" x2="18" y2="6.5" transform="rotate(240 18 18)"/>
+        <circle class="clockface__pin" cx="18" cy="18" r="1.7"/></svg>
+      <span class="hdr__time">1:40 a.m.</span> <span class="hdr__menu-k">Menu</span></button>
+  </div>
+</header>
+<nav class="rail" aria-label="Chapters"><ol>
+  <li><a href="#fulton"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:40 Fulton Street</span></a></li>
+  <li><a href="#one-table"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:41 One table still lit</span></a></li>
+  <li><a href="#get-down"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:45 Get down on the shot</span></a></li>
+  <li><a href="#the-break"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:46 The break</span></a></li>
+  <li><a href="#same-pot"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:48 Same shot, same pot</span></a></li>
+  <li><a href="#old-jack"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:50 Old Jack</span></a></li>
+  <li><a href="#the-bar"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:52 What’ll it be?</span></a></li>
+  <li><a href="#jukebox"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:54 The sign</span></a></li>
+  <li><a href="#friends"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:56 A friend’s table</span></a></li>
+  <li><a href="#last-call"><i class="rail__head" aria-hidden="true"></i><span class="rail__label">1:58 Last call</span></a></li>
+</ol></nav>
+<dialog id="matchbook" class="mb" aria-labelledby="mb-h">
+  <div class="mb__cover">
+    <p class="mb__mark">Powerjack</p>
+    <div class="foil"></div>
+    <p class="mb__ad"><b>Ladies’ Night</b> <i>every Wednesday</i> <small>Pool 25¢ a rack · League night Thursday</small></p>
+    <div class="mb__set">
+      <label><input type="checkbox" data-still> Less motion</label>
+      <label><input type="checkbox" data-hush> Hush Jack</label>
+    </div>
+  </div>
+  <nav class="mb__comb comb" aria-labelledby="mb-h" data-lenis-prevent>
+    <h2 id="mb-h">Chapters</h2>
+    <ol>
+        <li><a href="#fulton"><time datetime="01:40">1:40</time> <b>Fulton Street</b> <i>Come in out of the rain</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li><a href="#one-table"><time datetime="01:41">1:41</time> <b>One table still lit</b> <i>Seven lights, no fill</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#get-down"><time datetime="01:45">1:45</time> <b>Get down on the shot</b> <i>No aim line, no power bar</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li><a href="#the-break"><time datetime="01:46">1:46</time> <b>The break</b> <i>Sixty frames, a millisecond at a time</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#same-pot"><time datetime="01:48">1:48</time> <b>Same shot, same pot</b> <i>Five engines, one digest</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#old-jack"><time datetime="01:50">1:50</time> <b>Old Jack</b> <i>A ghost with a house cue</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#the-bar"><time datetime="01:52">1:52</time> <b>What’ll it be?</b> <i>Ring for service</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#jukebox"><time datetime="01:54">1:54</time> <b>The sign</b> <i>The J is mostly on</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#friends"><time datetime="01:56">1:56</time> <b>A friend’s table</b> <i>Tell them the number</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+        <li><a href="#last-call"><time datetime="01:58">1:58</time> <b>Last call</b> <i>Where things stand</i><i class="comb__head" aria-hidden="true"></i></a></li>
+        <li aria-hidden="true"><i class="comb__stick"></i></li>
+    </ol>
+  </nav>
+  <button class="mb__close" type="button" commandfor="matchbook" command="close">Close cover before striking</button>
+</dialog>
+<main id="main" tabindex="-1">
+<!-- @include fulton -->
+<!-- @include one-table -->
+<!-- @include get-down -->
+<!-- @include the-break -->
+<!-- @include same-pot -->
+<!-- @include old-jack -->
+<!-- @include the-bar -->
+<!-- @include jukebox -->
+<!-- @include friends -->
+<!-- @include last-call -->
+</main>
+<!-- @include tab -->
+<div class="band" aria-hidden="true"><p class="sub"><span class="sub__who">Jack</span> <span class="band__line"></span></p><button class="band__hush" type="button" tabindex="-1">Hush</button></div>
+<div class="pool" aria-hidden="true"></div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><i class="cursor__dot"></i><i class="cursor__ring"><b class="cursor__label"></b></i></div>
+</body>
+</html>

@@ -1,0 +1,75 @@
+/* #the-bar · 1:52 · What'll it be? (§D7). The static design; P4 adds the drops and the pencil. */
+#the-bar { position: relative; padding-bottom: var(--sec-pad); }
+
+/* phone: the back bar as a 16:9 band on top; desktop: the whole section's backdrop, dimmed, darker on the copy side */
+#the-bar .bar__bg { position: relative; aspect-ratio: 16 / 9; margin-bottom: var(--s-6); background: var(--ink); }
+#the-bar .bar__pic, #the-bar .bar__pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#the-bar .bar__chip { left: var(--gutter); right: auto; bottom: var(--s-4); margin: 0; }
+
+#the-bar .bar__grid { position: relative; z-index: 1; display: grid; gap: var(--s-7); max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+#the-bar .bar__copy h2 { margin: var(--s-3) 0 var(--s-5); }
+#the-bar .bar__copy > p:not(.eyebrow, .sub) { max-width: 62ch; margin-bottom: var(--s-4); }
+
+#the-bar .byhand { display: grid; gap: var(--s-4); margin: var(--s-6) 0; }
+#the-bar .byhand dt { display: flex; align-items: center; gap: var(--s-2); font: 700 var(--fs-label) / 1.2 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+#the-bar .byhand dd { margin: var(--s-1) 0 0; color: var(--cream-dim); }
+#the-bar .byhand__ico { flex: none; width: 1.75rem; height: 1.75rem; fill: none; stroke: currentColor; stroke-width: 1.6; stroke-linecap: round; stroke-linejoin: round; }
+#the-bar .bar__jack { margin-top: var(--s-6); }
+
+/* the guest check: printed rows, pencil notes and the tab (the game's .ck, choice.css) */
+#the-bar .bar__desk { display: flex; flex-direction: column; align-items: center; gap: var(--s-6); }
+/* the text starts right of the red margin rule (46 px), so the print's corner only ever covers the margin */
+#the-bar .bar__paper { width: 100%; max-width: 28rem; padding: var(--s-5) var(--s-5) var(--s-4) 3.5rem; transform: rotate(var(--rest)); }
+#the-bar .bar__check { width: 100%; border-collapse: collapse; font: 400 var(--fs-typed) / 1.35 var(--f-paper); color: var(--check-print); }
+#the-bar .bar__check caption { padding-bottom: var(--s-1); border-bottom: 3px double var(--check-print); text-align: left; }
+#the-bar .check__head { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s-3); }
+#the-bar .check__c-price { width: 4em; }
+#the-bar .check__c-note { width: 30%; }
+#the-bar .check__brand { font: 800 1.5rem / 1 var(--f-display); font-variation-settings: 'SOFT' 100; letter-spacing: .01em; }
+#the-bar .check__no { font-weight: 700; color: var(--check-red); }
+#the-bar .check__meta td { padding: var(--s-2) 0 var(--s-1); }
+#the-bar .check__box { display: inline-flex; justify-content: space-between; gap: var(--s-2); min-width: 6.5em; margin: 0 .3em .3em 0; padding: .1em .4em; border: 1px solid var(--check-rule);
+  font-size: var(--fs-micro); letter-spacing: .12em; text-transform: uppercase; }
+#the-bar .check__box i { font: 400 1.1rem / 1 var(--f-hand); color: var(--pencil); letter-spacing: 0; text-transform: none; }
+#the-bar .check__sub { display: block; margin-top: var(--s-1); font-size: var(--fs-small); color: var(--check-print); }
+#the-bar .check__cols th { padding: var(--s-1) 0; border-bottom: 1px solid var(--check-print); font-size: var(--fs-micro); letter-spacing: .14em; text-transform: uppercase; text-align: left; }
+#the-bar .check__cols th:nth-child(2), #the-bar .bar__check td:nth-child(2) { text-align: right; white-space: nowrap; }
+#the-bar .bar__check tbody th, #the-bar .bar__check tbody td, #the-bar .bar__check tfoot th, #the-bar .bar__check tfoot td { padding: var(--s-2) 0; border-bottom: 1px solid var(--check-rule); vertical-align: top; text-align: left; }
+#the-bar .bar__check tbody th { font-weight: 700; }
+#the-bar .bar__check tbody small { display: block; font-weight: 400; font-size: var(--fs-small); color: var(--print-dim); }
+#the-bar .bar__check td:nth-child(2) { padding-left: var(--s-3); font-weight: 700; }
+#the-bar .bar__check .check__note { padding-left: var(--s-4); font: 400 1.25rem / 1.1 var(--f-hand); color: var(--pencil); }
+#the-bar .check__note--in { display: none; }
+#the-bar .bar__check tbody:not(.tab) tr:hover, #the-bar .bar__check tbody:not(.tab) tr:focus-within { background: rgba(255, 74, 42, .07); }
+#the-bar .bar__check .tab th, #the-bar .bar__check .tab td { padding-block: var(--s-1); font: 400 1.4rem / 1.15 var(--f-hand); color: var(--pencil); }
+#the-bar .bar__check .tab tr:first-child > * { padding-top: var(--s-3); }
+#the-bar .bar__check tfoot th, #the-bar .bar__check tfoot td { border-top: 2px solid var(--check-print); border-bottom: 0; }
+#the-bar .bar__check tfoot th { font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+#the-bar .bar__check tfoot td:nth-child(2) { font: 400 1.6rem / 1 var(--f-hand); color: var(--pencil); }
+#the-bar .bar__ring { margin: var(--s-4) 0 0; font: 600 var(--fs-label) / 1 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--walnut); text-align: center; }
+
+/* phone: each pencil note under its row */
+@media (max-width: 599.98px) {
+  #the-bar .bar__paper { padding-left: 3.25rem; }
+  #the-bar .bar__check :is(td.check__note, td:empty, .check__c-note, .check__cols th:last-child) { display: none; }
+  #the-bar .bar__check .check__note--in { display: block; padding: var(--s-1) 0 0 var(--s-3); font-weight: 400; }
+}
+
+/* the print: small, after the check on phones; a nickel binder clip bites it onto the check's corner on desktop */
+#the-bar .bar__print { order: 1; width: 60vw; max-width: 20rem; }
+#the-bar .bar__binder { display: none; }
+
+@media (min-width: 900px) {
+  #the-bar { padding-top: var(--sec-pad); }
+  #the-bar .bar__bg { position: absolute; inset: 0; aspect-ratio: auto; margin: 0; }
+  #the-bar .bar__pic { opacity: .3; -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, .35), #000 65%); mask-image: linear-gradient(90deg, rgba(0, 0, 0, .35), #000 65%); }
+  #the-bar .bar__chip { left: auto; right: calc(var(--gutter) + 1rem); bottom: var(--s-5); }   /* under the check, clear of the rail */
+  #the-bar .bar__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); align-items: start; }
+  #the-bar .bar__copy { grid-column: 1 / 6; }
+  #the-bar .bar__desk { grid-column: 6 / 13; flex-direction: row; align-items: flex-start; justify-content: flex-end; gap: 0; }
+  #the-bar .bar__paper { flex: 0 1 33rem; min-width: 23rem; max-width: 33rem; margin: 6rem 2rem 0 0; }   /* 2rem: the tilted corner stays clear of the rail */
+  #the-bar .bar__print { order: 0; position: relative; z-index: 1; flex: 0 1 17rem; min-width: 10rem; width: auto; margin: 0 -2.25rem 0 0; }
+  #the-bar .bar__binder { display: block; position: absolute; z-index: 2; right: .5rem; top: 52%; width: 2.6rem; height: 1.5rem; transform: rotate(4deg); filter: drop-shadow(0 2px 2px rgba(0, 0, 0, .5)); }
+  #the-bar .bar__binder::before { content: ''; position: absolute; inset: -1rem .35rem 70%; border: 2px solid #A9AFB5; border-bottom: 0; border-radius: .5rem .5rem 0 0; }
+  #the-bar .bar__binder::after { content: ''; position: absolute; inset: 0; background: linear-gradient(180deg, #D4D8DC, #8B9197 55%, #5D6369); clip-path: polygon(10% 0, 90% 0, 100% 100%, 0 100%); }
+}

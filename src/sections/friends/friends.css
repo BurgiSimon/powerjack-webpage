@@ -1,0 +1,57 @@
+/* #friends · 1:56 · A friend's table (§D9). The static design: the napkin at rest, written and stamped; P5 slides it in. */
+#friends { position: relative; padding-block: var(--sec-pad); }
+
+/* the rain on the storefront, behind the whole section on desktop, ink heavier on the left; phones lead with the napkin
+   alone (§D9), so the frame and its chip are not shown or loaded there */
+#friends .fr__bg { display: none; position: absolute; inset: 0; background: var(--ink); }
+#friends .fr__pic, #friends .fr__pic img { display: block; width: 100%; height: 100%; object-fit: cover; }
+#friends .fr__chip { bottom: var(--s-5); margin: 0; }
+
+#friends .fr__grid { position: relative; z-index: 1; display: grid; gap: var(--s-6); max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+#friends .fr__head h2 { margin-top: var(--s-3); }
+#friends .fr__copy p { max-width: 62ch; }
+#friends .fr__copy p + p { margin-top: var(--s-4); }
+
+/* the napkin: the game's own example number, in ballpoint */
+#friends .fr__desk { position: relative; order: -1; padding-bottom: 7.5rem; }
+#friends .fr__head { order: -2; }
+#friends .fr__napkin { position: relative; z-index: 1; display: grid; place-content: center; gap: var(--s-2); aspect-ratio: 1; width: 100%; max-width: 26rem; margin: 0 auto;
+  padding: var(--s-6); text-align: center; transform: rotate(var(--rest)); --rest: -1deg; font-family: var(--f-hand); color: var(--ballpoint); }
+#friends .fr__label { margin: 0; font-size: 1.6rem; line-height: 1; }
+#friends .fr__number { margin: 0; font-size: clamp(3rem, 2rem + 6vw, 5.5rem); line-height: 1; letter-spacing: .02em; white-space: nowrap; }
+#friends .fr__rule { margin: 0; font-size: 1.35rem; line-height: 1.2; }
+/* a torn strip of league sheet tucked under the napkin's corner */
+#friends .fr__sheet { position: absolute; right: 2%; bottom: 0; width: min(17rem, 72%); padding: 4.5rem var(--s-4) var(--s-4); transform: rotate(3deg);
+  clip-path: polygon(0 6%, 6% 0, 12% 5%, 19% 1%, 26% 6%, 33% 0, 40% 4%, 47% 0, 55% 6%, 62% 1%, 70% 5%, 77% 0, 85% 6%, 92% 1%, 100% 5%, 100% 100%, 0 100%); }
+#friends .fr__sheet .stamp { display: inline-block; margin: 0 0 var(--s-2); }
+#friends .fr__pencil { margin: 0; font: 400 1.2rem / 1.2 var(--f-hand); color: var(--pencil); }
+
+/* the talk card */
+#friends .fr__talk { padding: var(--s-5); }
+#friends .fr__talk h3 { margin-bottom: var(--s-4); }
+#friends .fr__keys { display: grid; gap: var(--s-3); margin: 0; }
+#friends .fr__keys dt { display: flex; align-items: center; gap: var(--s-2); font-weight: 700; color: var(--cream); }
+#friends .fr__keys dd { margin: var(--s-1) 0 0; font-style: italic; color: var(--cream-dim); }
+#friends .fr__talk small { display: block; margin-top: var(--s-4); font-size: var(--fs-small); color: var(--cream-dim); }
+
+/* the friends' tinted subtitles: the name is always written, so colour is never the only marker */
+#friends .fr__subs { margin: 0; }
+#friends .subs { display: flex; flex-wrap: wrap; gap: var(--s-3) var(--s-4); margin: 0; padding: 0; list-style: none; }
+#friends .subs .sub { padding: .4rem 1.2rem; font-size: var(--fs-body); }
+#friends .subs .sub__who { color: var(--tint); }
+#friends .fr__subs figcaption { margin-top: var(--s-2); font-size: var(--fs-small); color: var(--cream-dim); }
+#friends .fr__scope { max-width: 60ch; margin: 0; font: 400 var(--fs-small) / 1.5 var(--f-paper); color: var(--cream-dim); }
+
+@media (min-width: 900px) {
+  #friends .fr__bg { display: block; }
+  #friends .fr__pic { -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, .12) 30%, rgba(0, 0, 0, .5) 55%, #000);
+    mask-image: linear-gradient(90deg, rgba(0, 0, 0, .12) 30%, rgba(0, 0, 0, .5) 55%, #000); }
+  #friends .fr__grid { grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: var(--s-5); align-items: start; }
+  #friends .fr__head { grid-column: 1 / 6; grid-row: 1; }
+  #friends .fr__copy { grid-column: 1 / 6; grid-row: 2; }
+  #friends .fr__subs { grid-column: 1 / 6; grid-row: 3; }
+  #friends .fr__scope { grid-column: 1 / 6; grid-row: 4; }
+  #friends .fr__desk { grid-column: 6 / 10; grid-row: 1 / 5; align-self: center; }
+  #friends .fr__napkin { --rest: -2deg; width: min(26rem, 32vw); }
+  #friends .fr__talk { grid-column: 10 / 13; grid-row: 1 / 5; align-self: center; margin-right: 1rem; }   /* clear of the rail */
+}

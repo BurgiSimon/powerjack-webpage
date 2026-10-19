@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="en-US">
+<head>
+<meta charset="utf-8">
+<title>Powerjack OG card</title>
+<!-- 1200 × 630, screenshotted by tools/og.mjs into public/og.jpg; paths are relative to tools/ -->
+<style>
+@font-face { font-family: 'Fraunces Variable'; font-style: normal; font-weight: 100 900; src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-normal.woff2') format('woff2-variations'); }
+@font-face { font-family: 'Fraunces Variable'; font-style: italic; font-weight: 100 900; src: url('../node_modules/@fontsource-variable/fraunces/files/fraunces-latin-soft-italic.woff2') format('woff2-variations'); }
+@font-face { font-family: 'Courier Prime'; font-weight: 700; src: url('../node_modules/@fontsource/courier-prime/files/courier-prime-latin-700-normal.woff2') format('woff2'); }
+@font-face { font-family: 'Barlow Condensed'; font-weight: 600; src: url('../node_modules/@fontsource/barlow-condensed/files/barlow-condensed-latin-600-normal.woff2') format('woff2'); }
+:root { --ink: #17110C; --cream: #EFE4CC; --brass: #C9A55A; --stock: #E8DCC0; --stock-edge: #CDBE9C; --mb-red: #A3301A; --check-red: #B2432F;
+  --foil: linear-gradient(90deg, #8A6A2C, #E9CF8A 22%, #B8913F 40%, #F4E2A8 58%, #9C7733 80%, #D9B970);
+  --tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .14 0 0 0 .38 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"); }
+* { box-sizing: border-box; margin: 0; }
+html, body { width: 1200px; height: 630px; overflow: hidden; background: var(--ink); }
+/* the sign over the top of the jukebox on the right, at 98 %: frame x 82–1306, y 200–843 of 1920 × 1080 */
+.bg { position: absolute; left: -80px; top: -196px; width: 1882px; height: 1058px; }
+.shade { position: absolute; inset: 0; background: linear-gradient(90deg, rgba(23,17,12,.92) 0, rgba(23,17,12,.7) 26%, rgba(23,17,12,0) 52%),
+  radial-gradient(ellipse 120% 100% at 60% 45%, transparent 55%, rgba(12,7,3,.55)); }
+.card { position: absolute; left: 60px; top: 132px; width: 420px; }
+.chip { position: relative; padding: 26px 34px 30px; background: var(--stock) var(--tooth); transform: rotate(-2deg);
+  box-shadow: inset 0 0 0 6px var(--stock), inset 0 0 0 7px var(--mb-red), inset 0 0 0 10px var(--stock), inset 0 0 0 11px var(--mb-red),
+    0 2px 0 var(--stock-edge), 0 26px 48px rgba(0,0,0,.55), 0 6px 12px rgba(0,0,0,.35); }
+.eyebrow { font: 600 15px/1 'Barlow Condensed', sans-serif; letter-spacing: .22em; text-transform: uppercase; color: var(--mb-red); text-align: center; }
+.mark { font: 900 68px/1 'Fraunces Variable', serif; font-variation-settings: 'SOFT' 100; letter-spacing: -.015em; color: var(--mb-red); text-align: center; margin-top: 8px; }
+.foil { height: 3px; background: var(--foil); margin: 14px 18px 0; box-shadow: 0 1px 0 rgba(255,255,255,.25) inset; }
+.stamp { width: fit-content; margin: 18px 4px 0 auto; font: 700 19px/1 'Courier Prime', monospace; text-transform: uppercase; letter-spacing: .04em;
+  color: var(--check-red); border: 2px solid currentColor; padding: .25em .5em; transform: rotate(-7deg); opacity: .85; text-shadow: 0 0 .4px currentColor; }
+.line { margin-top: 44px; font: italic 400 34px/1.25 'Fraunces Variable', serif; font-variation-settings: 'SOFT' 100; color: var(--cream);
+  text-shadow: 0 2px 12px rgba(0,0,0,.6); }
+</style>
+</head>
+<body>
+<img class="bg" src="../public/media/frames/jukebox-neon-1920.webp" alt="">
+<div class="shade"></div>
+<div class="card">
+  <div class="chip">
+    <p class="eyebrow">Billiards ✦ Cocktails</p>
+    <p class="mark">Powerjack</p>
+    <div class="foil"></div>
+    <p class="stamp">In development</p>
+  </div>
+  <p class="line">Thursday, 1:40 a.m.<br>One table still lit.</p>
+</div>
+</body>
+</html>

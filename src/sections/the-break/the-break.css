@@ -1,0 +1,82 @@
+/* #the-break · 1:46 · the break. Static: copy, the physics sheet, the coasters and three stills with the 2 s clip.
+   With motion the stills give way to the stage (poster, sequence canvas, chalk word, scrub card). */
+
+.the-break { padding-block: var(--sec-pad); }
+.tb__stage, .tb__seq, .tb__chalk, .tb__scrub { display: none; }
+.motion .tb__stage { display: block; height: 100svh; }
+.motion .tb__seq { display: block; position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: 50% 55%; }
+.motion .tb__chalk { display: block; }
+.motion .tb__scrub { display: grid; }
+.motion .tb__stills { display: none; }
+
+.tb__copy { display: grid; gap: 1rem; padding-bottom: 1rem; }
+.tb__copy > p:not(.eyebrow) { max-width: 48ch; }
+
+.tb__chalk { position: absolute; left: 50%; top: calc(var(--hdr-h) + 6svh); z-index: var(--z-stage-ui); }
+.tb__chalk span { position: absolute; left: 0; top: 0; opacity: 0; }
+.tb__chalk span:first-child { opacity: 1; }
+.tb__loading { position: absolute; inset: 0; z-index: var(--z-stage-ui); place-content: center; background: rgba(0, 0, 0, .55); }
+.tb__scrub { position: absolute; left: var(--gutter); bottom: 6.5rem; z-index: var(--z-stage-ui); gap: .5rem; width: min(24rem, calc(100% - 2 * var(--gutter)));
+  padding: 1.1rem 1.25rem 1rem; }
+.tb__counter { font: 400 var(--fs-typed)/1.3 var(--f-paper); font-variant-numeric: tabular-nums; color: var(--cream); }
+.tb__label { font: 600 var(--fs-label)/1.2 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+.tb__play { justify-self: start; min-height: 44px; padding: 0 1.1em; border: 1.5px solid rgba(239, 228, 204, .6); border-radius: 2px; background: none;
+  color: var(--cream); font: 600 var(--fs-label)/1 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; }
+.tb__play:hover { border-color: var(--cream); }
+.tb__foot { font-size: var(--fs-small); line-height: 1.4; color: var(--cream-dim); }
+
+/* the game's chalk-cube slider: a cube of blue cue chalk on a red-filled track (--f: 0…1, set by the scrubber) */
+.cube-range { -webkit-appearance: none; appearance: none; width: 100%; height: 32px; margin: 0; background: transparent; cursor: pointer; --f: 0;
+  --cube: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 26'%3E%3Cpath d='M2 7.5 12 13v11L2 18.5z' fill='%233F73B8'/%3E%3Cpath d='M12 13l10-5.5v11L12 24z' fill='%232B5596'/%3E%3Cpath d='M12 2l10 5.5L12 13 2 7.5z' fill='%236FA3E0'/%3E%3Cellipse cx='12' cy='7.5' rx='4.8' ry='2.5' fill='%233E73B6'/%3E%3Cpath d='M7.5 7.1c1.5-1.6 7.5-1.6 9 0' fill='none' stroke='%239CC0EE' stroke-width='.8' stroke-linecap='round'/%3E%3Cpath d='M2 7.5 12 13l10-5.5M12 13v11' fill='none' stroke='%23B4D0F2' stroke-opacity='.6' stroke-width='.6'/%3E%3Cpath d='M12 1.5l10.5 5.8v11.5L12 24.5 1.5 18.8V7.3z' fill='none' stroke='%23101A30' stroke-opacity='.6' stroke-width='.8' stroke-linejoin='round'/%3E%3C/svg%3E"); }
+.cube-range::-webkit-slider-runnable-track { height: 4px; border-radius: 2px; background: linear-gradient(90deg, var(--mb-red) calc(var(--f) * 100%), rgba(239, 228, 204, .22) 0); }
+.cube-range::-moz-range-track { height: 4px; border-radius: 2px; background: rgba(239, 228, 204, .22); }
+.cube-range::-moz-range-progress { height: 4px; background: var(--mb-red); }
+.cube-range::-webkit-slider-thumb { -webkit-appearance: none; width: 24px; height: 26px; margin-top: -11px; border: 0; border-radius: 0;
+  background: var(--cube) center / contain no-repeat; filter: drop-shadow(0 1.5px 1.5px rgba(20, 10, 4, .6)); }
+.cube-range::-moz-range-thumb { width: 24px; height: 26px; border: 0; border-radius: 0; background: var(--cube) center / contain no-repeat; }
+
+.tb__coasters { display: flex; flex-wrap: wrap; gap: 1.25rem 1.5rem; padding-block: 1rem; }
+.tb__coasters .coaster { --d: 8.75rem; }
+.coaster__n small { font-size: .5em; font-weight: 800; letter-spacing: 0; }
+.tb__coasters .coaster:nth-child(odd) { transform: rotate(-4deg); }
+.tb__coasters .coaster:nth-child(even) { transform: rotate(3deg); }
+
+.tb__sheet { --rest: .6deg; align-self: start; display: grid; grid-template-columns: minmax(0, 1fr); gap: .9rem; padding: 1.75rem 2rem 1.5rem; transform: rotate(var(--rest)); }
+.tb__typed { display: grid; grid-template-columns: minmax(0, 1fr); gap: .15rem; font: 400 var(--fs-typed)/1.45 var(--f-paper); }
+.tb__typed li { width: fit-content; max-width: 100%; padding-left: 15ch; text-indent: -15ch; white-space: pre-wrap;
+  box-shadow: inset 0 -1px rgba(98, 150, 116, .5); }
+.tb__fine { font: 400 var(--fs-small)/1.45 var(--f-paper); color: var(--league-dim); }
+
+.tb__stills { display: grid; gap: 1rem; }
+.tb__three { display: grid; gap: 1rem; }
+.tb__three figure { display: grid; gap: .5rem; }
+.tb__three picture { display: block; aspect-ratio: 16 / 9; overflow: hidden; border-radius: 2px; background: var(--beam); }
+.tb__three img { width: 100%; height: 100%; object-fit: cover; }
+.tb__three figcaption { font: italic 400 var(--fs-lede)/1.2 var(--f-display); }
+.tb__stills-cap { font: 600 var(--fs-micro)/1.45 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+.tb__video summary { display: list-item; width: max-content; padding-block: .8rem; cursor: pointer; color: var(--cream);
+  font: 600 var(--fs-label)/1 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; }
+.tb__video summary::marker { color: var(--brass); }
+.tb__video video { width: 100%; max-width: 960px; height: auto; margin-top: .5rem; background: #000; }
+
+@media (min-width: 900px) {
+  .the-break { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); column-gap: var(--gutter); row-gap: 2.5rem;
+    padding-inline: max(var(--gutter), calc((100% - var(--maxw)) / 2 + var(--gutter)));
+    grid-template-areas: "c c c c c c s s s s s s" "k k k k k k s s s s s s" "v v v v v v v v v v v v"; }
+  .motion .the-break { grid-template-areas: "c c c c c c . . . . . ." "t t t t t t t t t t t t" "k k k k k k s s s s s s"; }
+  .tb__copy { grid-area: c; }
+  .tb__stage { grid-area: t; width: 100vw; margin-left: calc(50% - 50vw); }
+  .tb__coasters { grid-area: k; align-self: start; }
+  .tb__sheet { grid-area: s; margin-right: var(--rail-clear); }
+  .tb__stills { grid-area: v; margin-right: var(--rail-clear); }
+  .tb__three { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+}
+@media (max-width: 899.98px) {
+  .the-break > :not(.tb__stage) { margin-inline: var(--gutter); }
+  .the-break > * + * { margin-top: 2rem; }
+  .tb__coasters { display: grid; grid-template-columns: repeat(2, max-content); justify-content: center; }
+  .tb__coasters .coaster { --d: min(9.5rem, 40vw); }
+  .tb__sheet { padding: 1.25rem 1.1rem 1.1rem; --rest: 0deg; }
+  .tb__typed li { padding-left: 0; text-indent: 0; }
+  .tb__scrub { bottom: 5.75rem; }
+}

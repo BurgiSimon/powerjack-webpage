@@ -1,0 +1,37 @@
+/* #same-pot · 1:48 · five engines, one table. Static: the copy and five carbons, fanned and stamped. */
+
+.same-pot { padding-block: var(--sec-pad) calc(var(--sec-pad) + 3rem); overflow: clip; }
+.sp__bg { position: absolute; inset: 0; pointer-events: none; }
+.sp__pic, .sp__pic img { position: absolute; inset: 0; width: 100%; height: 100%; }
+.sp__pic img { object-fit: cover; opacity: .18; }   /* bottom-anchored by its focal attribute */
+.sp__bg::before { content: ''; position: absolute; inset: 0; z-index: 1; background: linear-gradient(var(--ink) 8%, rgba(23, 17, 12, .4) 55%, rgba(23, 17, 12, .15) 85%, var(--ink)); }
+.sp__bg .chip { pointer-events: auto; }
+.sp__grid { position: relative; z-index: var(--z-content); row-gap: 3rem; }
+.sp__copy { grid-column: 1 / 6; display: grid; gap: 1rem; align-content: start; }
+.sp__copy > p:not(.eyebrow) { max-width: 48ch; }
+.sp__copy blockquote { padding-left: 1rem; border-left: 2px solid var(--brass); font: italic 400 var(--fs-quote)/1.2 var(--f-display); }
+.sp__live { padding: .9rem 1rem; border: 1px dashed rgba(201, 165, 90, .45); color: var(--cream-dim); }
+.sp__print { font: 700 1.05em/1 var(--f-paper); color: var(--amber); letter-spacing: .04em; }
+
+.sp__carbons { grid-column: 6 / 13; align-self: center; display: grid; gap: 1rem; align-content: start; margin-right: var(--rail-clear); }
+.sp__fan { position: relative; min-height: 19.5rem; }
+.carbon { position: absolute; left: calc(50% + var(--x, 0%)); top: 1.5rem; width: max-content; margin: 0; padding: 1rem 1.15rem;
+  font: 400 .8125rem/1.55 var(--f-paper); letter-spacing: .02em; transform: translateX(-50%) rotate(var(--r, 0deg)); }
+.sp__stamp { position: absolute; left: 66%; top: 74%; z-index: 6; font-size: 1.6rem; transform: translate(-50%, -50%) rotate(-7deg); }
+.sp__carbons figcaption { font: 600 var(--fs-micro)/1.45 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+.sp__foot { font-size: var(--fs-small); color: var(--cream-dim); }
+
+@media (max-width: 899.98px) {
+  .sp__copy, .sp__carbons { grid-column: auto; }
+  .sp__carbons { margin-top: 2.5rem; }
+  /* carbon 1 in full, the other four as stubs (engine and digest), stacked 14 px apart */
+  .sp__fan { display: grid; grid-template-columns: minmax(0, 1fr); min-height: 0; padding-bottom: 1rem; }
+  .carbon { position: relative; left: 0; top: 0; width: auto; padding-inline: .8rem; font-size: .6875rem; white-space: pre-wrap; transform: rotate(var(--stack-r, 0deg)); }   /* inline --r is the desktop fan */
+  .carbon:not(:first-child) { margin-top: -.25rem; padding-block: .55rem; }
+  .carbon:not(:first-child) > .mid { display: none; }
+  .carbon:nth-child(2) { margin-left: 14px; --stack-r: -1deg; }
+  .carbon:nth-child(3) { margin-left: 28px; --stack-r: .8deg; }
+  .carbon:nth-child(4) { margin-left: 42px; --stack-r: -.6deg; }
+  .carbon:nth-child(5) { margin-left: 56px; --stack-r: 1deg; }
+  .sp__stamp { left: calc(100% - 5.5rem); top: 27%; font-size: 1.25rem; }
+}

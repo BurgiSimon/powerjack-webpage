@@ -1,0 +1,61 @@
+/* #fulton · 1:40 · the storefront at night. Static: the reduced-motion design (picture, CSS mist, frame, signs, card, copy). */
+
+.fulton__stage { height: 100svh; min-height: 32rem; }
+.fulton__room { position: absolute; inset: 0; margin: 0; }
+.fulton__glass { position: absolute; inset: 0; width: 100%; height: 100%; display: none; }
+.motion .fulton__glass { display: block; opacity: 0; }   /* the glass fades itself in once its first frame draws */
+.fulton__dusk { position: absolute; inset: 0; background: var(--ink); opacity: 0; pointer-events: none; }
+.fulton__chip { right: 2.4vw; bottom: calc(12svh + 12px); z-index: 4; }
+.fulton__front, .fulton__walk, .fulton__hint { z-index: var(--z-stage-ui); }
+
+/* gold leaf, centred in the big window */
+.fulton__leaf { position: absolute; z-index: 2; left: 36vw; top: 21.5%;   /* above the frame's shadows */ width: max-content; max-width: 64vw; transform: translateX(-50%); text-align: center; }
+.fulton__eyebrow, .fulton__sub { width: max-content; margin-inline: auto; background: var(--foil); -webkit-background-clip: text; background-clip: text;
+  -webkit-text-fill-color: transparent; color: transparent; filter: drop-shadow(0 1px 2px rgba(12, 7, 3, .95)); }
+.fulton__eyebrow { margin-bottom: .5rem; font: 600 var(--fs-eyebrow)/1.4 var(--f-hud); letter-spacing: .28em; text-transform: uppercase;
+  font-size: max(var(--fs-eyebrow), .875rem); filter: brightness(1.3) drop-shadow(0 0 1px #0C0703) drop-shadow(0 0 3px #0C0703) drop-shadow(0 0 8px rgba(12, 7, 3, .9)); }
+.fulton__leaf .leaf { font-size: min(var(--fs-mega), 10.5vw); }   /* the full word fits the window between frame and mullion */
+.fulton__sub { margin-top: .75rem; font: italic 500 var(--fs-lede)/1.25 var(--f-display);
+  filter: drop-shadow(0 0 1px #0C0703) drop-shadow(0 0 4px rgba(12, 7, 3, .95)); }   /* holds over a lit shade */
+
+/* the card taped inside the door glass */
+.fulton__card { --w: max(206px, 12.5vw); --rest: -2deg; position: absolute; left: calc(84.8vw - var(--w) / 2); top: 47%; width: var(--w);
+  display: grid; justify-items: center; gap: .55rem; padding: 1rem .5rem .75rem; text-align: center; transform: rotate(var(--rest)); }
+.fulton__card::before, .fulton__card::after { content: ''; position: absolute; top: -7px; width: 38px; height: 14px; background: rgba(233, 214, 160, .7);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, .15); }
+.fulton__card::before { left: -12px; transform: rotate(-30deg); }
+.fulton__card::after { right: -12px; transform: rotate(28deg); }
+.fulton__card .stamp { letter-spacing: 0; }
+.fulton__date { font: 400 var(--fs-small)/1 var(--f-paper); letter-spacing: .06em; color: var(--print-dim); }
+
+/* the sidewalk band */
+.fulton__walk { position: absolute; left: 5vw; bottom: 15svh; display: grid; justify-items: start; gap: .6rem; max-width: 44ch;
+  padding: 1.25rem 1.5rem 1rem; }
+.fulton__lede { font: italic 400 var(--fs-lede)/1.25 var(--f-display); text-shadow: 0 1px 3px rgba(12, 7, 3, .9); }
+.fulton__deck { color: var(--cream-dim); text-shadow: 0 1px 3px rgba(12, 7, 3, .9); }
+.fulton__addr { font: 600 var(--fs-eyebrow)/1.5 var(--f-hud); font-style: normal; letter-spacing: .22em; text-transform: uppercase; color: var(--brass); }
+.fulton__thu { justify-items: start; padding-inline: 0; text-align: left; background: none; font-size: var(--fs-body); }
+.fulton__closing { display: flex; flex-wrap: wrap; align-items: center; gap: .4rem 1rem; color: var(--cream-dim); font-size: var(--fs-small); }
+.fulton__closing .stamp { opacity: 1; }   /* on ink, not paper: full ink keeps it ≥ 3:1 */
+.fulton__hint { position: absolute; left: 36vw; top: 64%; transform: translateX(-50%); opacity: 0; pointer-events: none;
+  font: 600 var(--fs-label)/1 var(--f-hud); letter-spacing: .22em; text-transform: uppercase; color: var(--cream); text-shadow: 0 1px 3px #000; }
+
+/* portrait phones: only the door; the card hangs beside OPEN so the sidewalk band has the bottom to itself */
+@media (max-width: 899.98px) and (orientation: portrait) {
+  .fulton__leaf { left: 50vw; top: 14%; max-width: 88vw; }
+  .fulton__leaf .leaf { font-size: min(var(--fs-mega), 15vw); }   /* the whole word inside the door glass */
+  .fulton__sub { width: auto; text-wrap: balance; }
+  .fulton__leaf { background: radial-gradient(closest-side, rgba(12, 7, 3, .6), rgba(12, 7, 3, .3) 70%, transparent); }   /* the lit shade sits behind the sub */
+  .storefront__sign--open { left: 5vw; top: 35%; width: 32vw; }
+  .fulton__card { --w: 206px; left: auto; right: 5vw; top: 34%; padding: .8rem .4rem .6rem; }
+  .fulton__walk { left: 16px; right: 16px; bottom: calc(9svh + 10px); max-width: none; gap: .45rem; padding: 1rem 0 .5rem; }
+  .fulton__deck { font-size: var(--fs-small); }
+  .fulton__addr { font-size: var(--fs-micro); }
+  .fulton__chip { right: 4vw; left: 4vw; bottom: max(6px, calc(4.5svh - 26px)); max-width: none; padding-block: .3rem; }   /* in the kick plate */
+  .fulton__hint { left: 50vw; top: 30%; }
+}
+@media (max-width: 899.98px) and (orientation: landscape) {
+  .fulton__leaf .leaf { font-size: min(var(--fs-mega), 15vh); }
+  .fulton__walk { bottom: 13svh; max-width: 52ch; gap: .3rem; padding-block: .5rem .25rem; }
+  .fulton__deck { font-size: var(--fs-small); line-height: 1.4; }
+}

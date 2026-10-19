@@ -1,0 +1,70 @@
+/* #last-call · 1:58 → 2:00 (§D10). The static design is the reduced-motion one: the sign already dark, Jack's line and
+   the tent line over it, then the CTA, the ledger and the FAQ on ink. P5 adds the pin, the door, the glass and the leaf. */
+#last-call { position: relative; }
+
+#last-call .lc__stage { position: relative; height: max(30rem, 80svh); overflow: hidden; background: var(--ink); }
+#last-call .lc__sign, #last-call .sign { position: absolute; inset: 0; }
+#last-call .sign__box { position: absolute; top: 0; left: 50%; height: 100%; aspect-ratio: 16 / 9; translate: -48% 0; }
+#last-call .sign__box picture, #last-call .sign__box img, #last-call .sign__letters { position: absolute; inset: 0; display: block; width: 100%; height: 100%; }
+#last-call .sign__box img { object-fit: fill; }
+#last-call .sign__off ~ .sign__lit { opacity: 0; }   /* the unlit frame shows; without it (no neon.json) the lit one stays */
+#last-call .lc__door, #last-call .lc__out, #last-call .lc__time { display: none; }
+
+#last-call .lc__jack { position: absolute; z-index: 2; left: 50%; bottom: 5.5rem; width: max-content; max-width: min(40rem, calc(100% - 2 * var(--gutter))); margin: 0; translate: -50% 0; text-align: center; }
+/* the line sits over the jukebox's lit arch: a denser smudge keeps it ≥ 4.5:1 there */
+#last-call .lc__jack { background: radial-gradient(closest-side, rgba(12, 7, 3, .86), rgba(12, 7, 3, .7) 65%, transparent); }
+#last-call .lc__tent { position: absolute; z-index: 3; left: 50%; bottom: 3rem; width: max-content; max-width: calc(100% - 2 * var(--gutter)); margin: 0; padding: .35em .9em; translate: -50% 0;
+  background: var(--ink-88); text-align: center; font: 600 var(--fs-label) / 1.3 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--brass); }
+#last-call .lc__chip { left: var(--gutter); right: var(--gutter); top: calc(var(--hdr-h) + var(--s-3)); bottom: auto; margin: 0; }
+
+/* the CTA: the only one on the page */
+#last-call .lc__cta { position: relative; z-index: var(--z-stage-ui); max-width: 46rem; margin-inline: auto; padding: var(--s-8) var(--gutter) var(--s-7); text-align: center; }
+#last-call .lc__cta h2 { margin: var(--s-3) 0 var(--s-5); }
+#last-call .lc__lede { max-width: 40rem; margin-inline: auto; font-size: var(--fs-lede); font-style: italic; line-height: 1.4; color: var(--cream); }
+#last-call .copy { min-height: 44px; margin-top: var(--s-5); padding: .6rem 1.4rem; border: 1px solid var(--brass); border-radius: 2px; background: var(--ink-88); color: var(--cream);
+  font: 700 var(--fs-label) / 1 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; cursor: pointer; }
+#last-call .copy:hover { background: var(--brass); color: var(--ink); }
+#last-call .gate { display: none; max-width: 26rem; margin: var(--s-6) auto 0; padding: var(--s-5); text-align: left; transform: rotate(-1deg); }
+#last-call .gate__h { margin-bottom: var(--s-2); font: 800 1.375rem / 1.15 var(--f-display); font-variation-settings: 'SOFT' 100; color: var(--mb-red); }
+@media (hover: none) and (pointer: coarse) { #last-call .gate { display: block; } }
+
+/* the ledger: a league sheet, stamped */
+#last-call .lc__info { padding-block: var(--s-6) var(--sec-pad); }
+#last-call .lc__ledger, #last-call .lc__faq { display: grid; gap: var(--s-7); padding-block: var(--s-6); }
+#last-call .ledger { padding: var(--s-6) var(--s-5) var(--s-5); color: var(--league-print); font-family: var(--f-paper); }
+#last-call .ledger__head { display: flex; flex-wrap: wrap; align-items: center; gap: var(--s-3) var(--s-5); padding-bottom: var(--s-3); border-bottom: 3px double var(--league-rule); }
+#last-call .ledger__head h3 { margin-right: auto; }
+#last-call .ledger__date { rotate: 5deg; }
+#last-call .ledger h4 { margin: var(--s-5) 0 var(--s-2); color: var(--league-rule); }
+#last-call .ledger__list li { position: relative; padding: var(--s-1) 0 var(--s-1) 1.6em; border-bottom: 1px dashed rgba(47, 107, 72, .35); }
+#last-call .ledger__list li::before { content: '✓'; position: absolute; left: .2em; color: var(--league-rule); font-weight: 700; }
+#last-call .ledger__list--next li::before { content: '○'; }
+#last-call .ledger__foot { margin-top: var(--s-4); font-size: var(--fs-small); font-style: italic; color: var(--league-dim); }
+
+/* the FAQ: native disclosure, a brass hairline between */
+#last-call .faq h3 { margin-bottom: var(--s-4); }
+#last-call .faq details { border-top: 1px solid rgba(201, 165, 90, .4); }
+#last-call .faq details:last-of-type { border-bottom: 1px solid rgba(201, 165, 90, .4); }
+#last-call .faq summary { display: list-item; min-height: 44px; padding: var(--s-3) 0; cursor: pointer; font: 800 1.25rem / 1.3 var(--f-display); font-variation-settings: 'SOFT' 100; color: var(--cream); }
+#last-call .faq summary::marker { color: var(--brass); }
+#last-call .faq details p { max-width: 62ch; margin-bottom: var(--s-4); color: var(--cream-dim); }
+
+#last-call .lc__print { justify-self: center; width: min(80vw, 22rem); }
+
+@media (min-width: 900px) {
+  #last-call .lc__stage { height: 100svh; }
+  #last-call .sign__box { top: 50%; height: auto; width: max(100%, 177.78svh); translate: -50% -50%; }
+  #last-call .lc__jack { bottom: 7rem; max-width: min(50rem, calc(100% - 2 * var(--gutter))); }
+  #last-call .lc__tent { bottom: 4.5rem; }
+  #last-call .lc__chip { right: auto; }   /* top left, as on phones: the bottom belongs to Jack and the tent line */
+  /* the ledger beside the FAQ, the two prints laid under the FAQ: one screen for the whole status */
+  #last-call .lc__info { display: grid; grid-template-columns: minmax(0, 6.5fr) minmax(0, 2.75fr) minmax(0, 2.75fr); gap: var(--s-6) var(--gutter); align-items: start;
+    max-width: var(--maxw); margin-inline: auto; padding-inline: var(--gutter); }
+  #last-call :is(.lc__ledger, .lc__faq) { display: contents; }
+  #last-call .ledger { grid-column: 1; grid-row: 1 / 3; }
+  #last-call .faq { grid-column: 2 / 4; grid-row: 1; }
+  #last-call .lc__print { grid-row: 2; justify-self: stretch; width: auto; }
+  #last-call .lc__print--title { grid-column: 2; }
+  #last-call .lc__print--chalk { grid-column: 3; }
+  #last-call .lc__print .print__cap { font-size: min(1.0625rem, 1.5vw); white-space: nowrap; }   /* two small prints: the pencil line stays on the border */
+}
