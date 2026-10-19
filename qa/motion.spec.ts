@@ -1,13 +1,18 @@
 import { test, expect } from '@playwright/test';
 
-// §G.4 Reduced motion, Pins and length.
+// SPEC2 §5/§8 Reduced motion (one static branch), pins and length. A pin is a .pin scene whose stage sticks (base.css).
 
-test('reduced motion: no pins, no live canvas, no hidden text', async ({ page }, info) => {
+const sticky = () => [...document.querySelectorAll('main > section')]
+  .filter((s) => s.getBoundingClientRect().height > innerHeight + 1 && getComputedStyle(s.querySelector('.stage')!).position === 'sticky').map((s) => s.id).sort();
+
+test('reduced motion: no pins, no live canvas, clips never start, no hidden text', async ({ page }, info) => {
   test.skip(info.project.name !== 'reduced', 'reduced project only');
   await page.goto('/?qa');
   await page.waitForFunction(() => (window as any).__pj);
-  expect(await page.evaluate(() => (window as any).__pj.ScrollTrigger.getAll().every((t: any) => !t.pin))).toBe(true);
+  await page.waitForTimeout(1500);
+  expect(await page.evaluate(sticky)).toEqual([]);
   await expect(page.locator('canvas[data-live]')).toHaveCount(0);
+  expect(await page.$$eval('video', (vs) => vs.filter((v) => !v.paused || v.currentTime !== 0).length)).toBe(0);
   const hidden = await page.evaluate(() => {
     const out: string[] = [], walk = document.createTreeWalker(document.querySelector('main')!, NodeFilter.SHOW_TEXT);
     for (let n = walk.nextNode(); n; n = walk.nextNode()) {
@@ -18,15 +23,17 @@ test('reduced motion: no pins, no live canvas, no hidden text', async ({ page },
     return out;
   });
   expect(hidden).toEqual([]);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight / innerHeight)).toBeCloseTo(5, 1);
 });
 
-test('pins and length', async ({ page }, info) => {
+test('exactly two pins, at most six viewports, one glass at most', async ({ page }, info) => {
   test.skip(!['desktop', 'phone'].includes(info.project.name), 'desktop and phone projects');
   await page.goto('/?qa');
   await page.waitForFunction(() => (window as any).__pj);
-  const pins = await page.evaluate(() => (window as any).__pj.ScrollTrigger.getAll().filter((t: any) => t.pin).length);
-  expect(pins).toBeLessThanOrEqual(info.project.name === 'desktop' ? 5 : 3);   // exactly 5 / 3 at launch
-  if (info.project.name === 'desktop') {
-    expect(await page.evaluate(() => document.documentElement.scrollHeight / innerHeight)).toBeLessThanOrEqual(17);
+  expect(await page.evaluate(sticky)).toEqual(['sign', 'the-break']);
+  expect(await page.evaluate(() => document.documentElement.scrollHeight / innerHeight)).toBeLessThanOrEqual(6);
+  for (let i = 0; i < 6; i++) {
+    expect(await page.locator('canvas[data-live]').count()).toBeLessThanOrEqual(1);
+    await page.waitForTimeout(500);
   }
 });

@@ -2,12 +2,9 @@ import { defineConfig, type Plugin } from 'vite';
 import { existsSync, readFileSync } from 'node:fs';
 
 type Frame = { w: number; h: number; sizes: number[]; focal: [number, number]; ph: string; alt: string };
-type Neon = { band: [number, number, number, number]; letters: { ch: string; pts: [number, number][] }[] };
+export type Clip = { w: number; h: number; loop: boolean; files: { mp4: string; webm: string } };
 const json = <T>(p: string): T => JSON.parse(readFileSync(p, 'utf8'));
 const SITE = process.env.SITE_URL ?? './';                       // set by the Pages workflow; './' locally
-const now = new Date(), pad = (n: number) => String(n).padStart(2, '0');
-const DATE76 = `${pad(now.getMonth() + 1)}/${pad(now.getDate())}/76`;
-const MON76 = `${now.toLocaleString('en-US', { month: 'short' }).toUpperCase()} · 76`;
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
 const attrs = (s: string) => Object.fromEntries([...s.matchAll(/([\w-]+)(?:="([^"]*)")?/g)].map(m => [m[1], m[2] ?? '']));
 
@@ -24,18 +21,14 @@ function frame(a: Record<string, string>, frames: Record<string, Frame>): string
     ('eager' in a ? ' fetchpriority="high"' : ' loading="lazy"') + ` decoding="async" style="${style}"></picture>`;
 }
 
-function sign(a: Record<string, string>, frames: Record<string, Frame>, neon: Neon | null): string {
-  const lit = frame({ name: 'jukebox-neon', class: 'sign__lit', ...('quiet' in a ? { alt: '' } : {}) }, frames);
-  if (!neon || !frames['jukebox-neon-off']) return `<div class="sign" data-sign="${a.id}"><div class="sign__box">${lit}</div></div>`;
-  const [x, y, w, h] = neon.band, id = a.id;
-  const img = (src: string, cls: string, i: number) => `<image class="${cls}" href="media/frames/${src}.webp" x="${x}" y="${y}"` +
-    ` width="${w}" height="${h}" clip-path="url(#${id}-l${i})" opacity="0"/>`;
-  return `<div class="sign" data-sign="${id}"><div class="sign__box">` +
-    frame({ name: 'jukebox-neon-off', class: 'sign__off', alt: '', noph: '' }, frames) + lit +
-    `<svg class="sign__letters" viewBox="0 0 1920 1080" preserveAspectRatio="xMidYMid slice" aria-hidden="true"><defs>` +
-    neon.letters.map((l, i) => `<clipPath id="${id}-l${i}"><polygon points="${l.pts.map(p => p.join(',')).join(' ')}"/></clipPath>`).join('') +
-    `</defs>` + neon.letters.map((_, i) => img('jukebox-neon-band', 'sign__on', i)).join('') +
-    img('jukebox-neon-off-band', 'sign__joff', 5) + `</svg></div></div>`;
+// <pj-video name class hero manual> → a muted inline <video>, or nothing when the clip is not on disk (the still underneath stands in)
+export function video(a: Record<string, string>, clips: Record<string, Clip> | null, pub = 'public'): string {
+  const c = clips?.[a.name];
+  if (!c || !c.files?.webm || !c.files?.mp4 || ![c.files.webm, c.files.mp4].every(f => existsSync(`${pub}/${f}`))) return '';
+  return `<video class="clip${a.class ? ` ${a.class}` : ''}" data-clip="${a.name}"${'manual' in a ? ' data-manual' : ''} muted playsinline` +
+    ` disablepictureinpicture disableremoteplayback${c.loop ? ' loop' : ''} preload="${'hero' in a ? 'metadata' : 'none'}"` +
+    ` width="${c.w}" height="${c.h}" aria-hidden="true"><source src="${c.files.webm}" type="video/webm">` +
+    `<source src="${c.files.mp4}" type="video/mp4"></video>`;
 }
 
 const partials = (): Plugin => ({
@@ -44,12 +37,17 @@ const partials = (): Plugin => ({
     order: 'pre',
     handler(html) {
       const frames = json<Record<string, Frame>>('src/data/frames.json');
-      const neon = existsSync('src/data/neon.json') ? json<Neon>('src/data/neon.json') : null;
+      const clips = existsSync('src/data/video.json') ? json<Record<string, Clip>>('src/data/video.json') : null;
       return html
-        .replace(/<!--\s*@include ([\w-]+)\s*-->/g, (_, id: string) => readFileSync(`src/sections/${id}/${id}.html`, 'utf8'))
+        .replace(/<!--\s*@include ([\w-]+)\s*-->/g, (_, id: string) => {
+          const p = `src/sections/${id}/${id}.html`;
+          if (existsSync(p)) return readFileSync(p, 'utf8');
+          this.warn(`@include ${id}: ${p} is missing`);   // parallel builds: a scene not written yet must not stop the page
+          return `<!-- missing: ${id} -->`;
+        })
         .replace(/<pj-frame([^>]*)><\/pj-frame>/g, (_, s: string) => frame(attrs(s), frames))
-        .replace(/<pj-sign([^>]*)><\/pj-sign>/g, (_, s: string) => sign(attrs(s), frames, neon))
-        .replaceAll('%DATE76%', DATE76).replaceAll('%MON76%', MON76).replaceAll('%SITE_URL%', SITE);
+        .replace(/<pj-video([^>]*)><\/pj-video>/g, (_, s: string) => video(attrs(s), clips))
+        .replaceAll('%SITE_URL%', SITE);
     },
   },
   handleHotUpdate({ file, server }) {   // partials and data are read by hand, so reload the page when they change

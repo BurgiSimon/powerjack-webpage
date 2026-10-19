@@ -1,0 +1,22 @@
+/* The sign, and Old Jack. Layers bottom → top: lit still, unlit still, the wake (V5), his haze, the quote. */
+.sign { --pin: 30svh; }   /* room for the haze to rise and the wake to fire */
+.sg__media, .sg__wake { position: absolute; inset: 0; }
+.sg__media video { object-position: 48% 42%; }   /* the stills' focal (frames.json), so the clips land on them exactly */
+/* the game's own Jack haze (ai/ghost.ts), not a cigarette; rises from low left, where he would stand. The blur turns the
+   particle sprite's hard core into haze (static, so the compositor keeps it) */
+.sg__smoke { position: absolute; left: -8vmin; bottom: -14vmin; width: 70vmin; height: auto; pointer-events: none; visibility: hidden;
+  mix-blend-mode: screen; filter: sepia(1) saturate(3) hue-rotate(-18deg) brightness(.45) blur(18px); will-change: transform, opacity; }
+.sg__smoke--b { left: 14vmin; bottom: -22vmin; }
+/* the quote sits on the dark wainscot right of the jukebox, never on its glow */
+.sg__quote { right: var(--gutter); bottom: 9svh; width: min(7.6em, 100% - 2 * var(--gutter)); font-size: var(--fs-quote); }
+.sg__quote blockquote { margin: 0; }
+.sg__quote p { font: italic 400 1em/1.15 var(--f-display); color: var(--cream); }   /* the <br> keeps “That’s just me.” a line of its own */
+.sg__quote figcaption { margin-top: .9rem; font: 600 var(--fs-label)/1.4 var(--f-hud); letter-spacing: .22em; text-transform: uppercase;
+  color: var(--amber); }
+/* portrait screens: the picture is sized by width so the whole word stays in frame (but never past 75svh tall, so tablets
+   keep ink too), feathered into ink above and below; the quote takes the ink under it */
+@media (max-aspect-ratio: 3/4) {
+  .sg__media { inset: auto; left: 50%; top: 50%; width: min(290vw, 133svh); aspect-ratio: 16 / 9; translate: -48.5% -62%;
+    mask-image: linear-gradient(transparent, #000 14%, #000 78%, transparent); }
+  .sg__quote { right: auto; left: 50%; translate: -50% 0; width: min(100% - 2 * var(--gutter), 15em); text-align: center; }
+}

@@ -1,0 +1,50 @@
+{
+ "bar-dolly": {
+  "w": 1280,
+  "h": 720,
+  "fps": 24,
+  "duration": 8,
+  "loop": true,
+  "files": {
+   "mp4": "media/video/bar-dolly-720.mp4",
+   "webm": "media/video/bar-dolly-720.webm"
+  },
+  "desc": "Real in-game render: the camera drifts from behind the bar out over the counter toward the lit table (POWERJACK neon, jukebox, three shades) and back; 8 s seamless loop."
+ },
+ "the-shot": {
+  "w": 1280,
+  "h": 720,
+  "fps": 24,
+  "duration": 7.042,
+  "loop": false,
+  "files": {
+   "mp4": "media/video/the-shot-720.mp4",
+   "webm": "media/video/the-shot-720.webm"
+  },
+  "desc": "Real in-game render, first person: you lean down over the cue ball, the bridge hand plants, two slow practice strokes, then the break and the rack spreading."
+ },
+ "rain-window": {
+  "w": 1280,
+  "h": 720,
+  "fps": 24,
+  "duration": 5.042,
+  "loop": true,
+  "files": {
+   "mp4": "media/video/rain-window-720.mp4",
+   "webm": "media/video/rain-window-720.webm"
+  },
+  "desc": "Real in-game render: rain on the storefront glass, the reversed COLD BEER neon, a lightning bolt (two strokes 0.65 s apart) lighting the glass and the ledge; 5 s seamless loop (the last second dissolves into the first)."
+ },
+ "neon-wakes": {
+  "w": 1920,
+  "h": 1080,
+  "fps": 24,
+  "duration": 3.5,
+  "loop": false,
+  "files": {
+   "mp4": "media/video/neon-wakes-1080.mp4",
+   "webm": "media/video/neon-wakes-1080.webm"
+  },
+  "desc": "The POWERJACK sign wakes letter by letter, the J last: cut by this page from two frames the game rendered, lit and unlit."
+ }
+}

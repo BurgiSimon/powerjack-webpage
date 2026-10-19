@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import AxeBuilder from '@axe-core/playwright';
 
-// §G.4 Accessibility (axe: 0 serious/critical) and Keyboard.
+// SPEC2 §8 Accessibility (axe: 0 serious/critical), keyboard, and a silent page.
 
 for (const path of ['/', '/404.html']) {
   test(`axe: no serious or critical issues on ${path}`, async ({ page }) => {
@@ -16,54 +16,40 @@ for (const path of ['/', '/404.html']) {
 test.describe('keyboard', () => {
   test.skip(({ isMobile }) => isMobile, 'keyboard walk-through runs on the desktop projects');
 
-  test('the first Tab lands on the skip link', async ({ page }) => {
+  test('Tab 1 is the skip link, Tab 2 is Motion', async ({ page }, info) => {
+    test.skip(info.project.name === 'reduced', 'under reduced motion the OS setting is the switch, so Motion is hidden');
     await page.goto('/');
     await page.keyboard.press('Tab');
     await expect(page.locator(':focus')).toHaveText('Skip to the page');
+    await page.keyboard.press('Tab');
+    await expect(page.locator(':focus')).toHaveAccessibleName('Motion');
   });
 
-  test('the matchbook opens with Enter, closes with Esc, and gives focus back', async ({ page }) => {
+  test('Motion turns the page still across a reload, and back', async ({ page }, info) => {
+    test.skip(info.project.name !== 'desktop', 'the switch is hidden under OS reduced motion');
     await page.goto('/');
-    const menu = page.locator('.hdr__menu');
-    await menu.focus();
-    await page.keyboard.press('Enter');
-    await expect(page.locator('#matchbook')).toBeVisible();
-    await page.keyboard.press('Escape');
-    await expect(page.locator('#matchbook')).toBeHidden();
-    await expect(menu).toBeFocused();
-  });
-
-  test('a chapter in the matchbook focuses its section', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('.hdr__menu').click();
-    await page.locator('#matchbook a[href="#same-pot"]').focus();
-    await page.keyboard.press('Enter');
-    await expect(page.locator('#matchbook')).toBeHidden();
-    await expect(page.locator('#same-pot')).toBeFocused({ timeout: 5000 });
-  });
-
-  test('arrow keys change Jack', async ({ page }) => {
-    await page.goto('/');
-    await page.locator('input[name="jack"][value="regular"]').focus();
-    await page.keyboard.press('ArrowRight');
-    await expect(page.locator('input[name="jack"][value="shark"]')).toBeChecked();
-  });
-
-  test('slider arrows step the break one frame', async ({ page }, info) => {
-    test.skip(info.project.name === 'reduced', 'the scrubber is part of the motion branch; reduced motion shows the stills');
-    await page.goto('/');
-    const s = page.locator('#break-scrub');
-    await s.focus();
-    await page.keyboard.press('ArrowRight');
-    await expect(s).toHaveValue('2');
-  });
-
-  test('Turn over toggles a print', async ({ page }) => {
-    test.fixme(true, 'core/paper.ts lands in P4; un-fixme it then');
-    await page.goto('/');
-    const b = page.locator('.print__turn').first();
-    await b.focus();
-    await page.keyboard.press('Enter');
+    const b = page.locator('.hdr__motion');
     await expect(b).toHaveAttribute('aria-pressed', 'true');
+    await Promise.all([page.waitForEvent('load'), b.click()]);
+    await expect(page.locator('html')).toHaveClass(/\bstill\b/);
+    await expect(b).toHaveAttribute('aria-pressed', 'false');
+    await Promise.all([page.waitForEvent('load'), b.click()]);
+    await expect(page.locator('html')).not.toHaveClass(/\bstill\b/);
   });
+});
+
+test('a silent page: no audio element, no AudioContext through a full scroll', async ({ page }, info) => {
+  test.skip(info.project.name !== 'desktop', 'one run is enough');
+  await page.addInitScript(() => {
+    for (const k of ['AudioContext', 'webkitAudioContext'] as const) {
+      const C = (window as any)[k];
+      if (C) (window as any)[k] = class extends C { constructor(...a: any[]) { super(...a); (window as any).__audio = ((window as any).__audio ?? 0) + 1; } };
+    }
+  });
+  await page.goto('/');
+  const h = await page.evaluate(() => document.documentElement.scrollHeight);
+  for (let y = 0; y <= h; y += 400) { await page.mouse.wheel(0, 400); await page.waitForTimeout(30); }
+  await page.mouse.click(700, 450);
+  expect(await page.evaluate(() => (window as any).__audio ?? 0)).toBe(0);
+  await expect(page.locator('audio')).toHaveCount(0);
 });

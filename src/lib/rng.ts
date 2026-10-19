@@ -15,5 +15,3 @@ export function fmix(h: number): number {
   return h >>> 0;
 }
 
-// Box–Muller: one standard normal from two uniforms (1 − u keeps log away from 0)
-export const gauss = (rand: () => number): number => Math.sqrt(-2 * Math.log(1 - rand())) * Math.cos(2 * Math.PI * rand());

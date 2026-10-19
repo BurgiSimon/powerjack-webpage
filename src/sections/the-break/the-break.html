@@ -1,58 +1,7 @@
-<section id="the-break" class="sec the-break" data-time="01:46" aria-labelledby="the-break-h" tabindex="-1">
-  <div class="tb__copy smudge">
-    <p class="eyebrow">1:46 a.m. · The break</p>
-    <h2 id="the-break-h">One millisecond at a time.</h2>
-    <p>These are sixty frames of the game’s own break, rendered at full power from the foot of the table. Scroll them, scrub them, or play them slow. Your push only sets how fast they go by.</p>
+<section id="the-break" class="scene the-break pin" aria-label="The break">
+  <div class="stage tb__stage">
+    <picture class="tb__base motion-only"><source type="image/avif" srcset="media/seq/break-000.avif"><img src="media/seq/break-000.webp" width="1280" height="720" loading="lazy" decoding="async" alt="In-game frame from the foot of the table: the cue ball running at the rack, the POWERJACK neon and the jukebox beyond."></picture>
+    <picture class="tb__still static-only"><source type="image/avif" srcset="media/seq/break-012.avif"><img src="media/seq/break-012.webp" width="1280" height="720" loading="lazy" decoding="async" alt="In-game frame: the rack bursting apart across the green cloth."></picture>
+    <canvas class="tb__seq motion-only" width="1280" height="720" aria-hidden="true"></canvas>
   </div>
-  <div class="tb__stage stage">
-    <pj-frame name="table-wide-rack" class="tb__poster" sizes="100vw" alt="In-game frame from the foot corner before the break: the rack, the POWERJACK neon over the jukebox, the BANK SHOT ’75 arcade, the chalkboard."></pj-frame>
-    <canvas class="tb__seq" width="1280" height="720" aria-hidden="true"></canvas>
-    <p class="sr">The break, frame by frame: the cue ball hits the rack and the balls scatter across the table.</p>
-    <p class="tb__chalk" aria-hidden="true"><span class="chalked">Rack</span><span class="chalked">Thunder</span><span class="chalked">Scatter</span></p>
-    <div class="tb__loading match-loader" role="progressbar" aria-label="Racking the balls" aria-valuemin="0" aria-valuemax="100" hidden>
-      <div class="match" style="--len:140px" aria-hidden="true"><div class="m-stick"></div><div class="m-char"></div><div class="m-head"></div><div class="m-flame"><i></i></div></div>
-      <p>Racking the balls</p>
-    </div>
-    <div class="tb__scrub card-ink">
-      <p class="tb__counter" aria-hidden="true">Frame 1 / 60 · 0.00 s · 0 steps</p>
-      <label class="tb__label" for="break-scrub">Scrub the break</label>
-      <input id="break-scrub" class="cube-range" type="range" min="1" max="60" step="1" value="1" aria-valuetext="Frame 1 of 60, 0.00 seconds">
-      <button class="tb__play" type="button">Play it at quarter speed</button>
-      <p class="tb__foot">One frame is 1/30 s of game time, about 33 steps of the solver. The cue ball tops out at 7 m/s.</p>
-    </div>
-    <p class="chip">In-game frames · ultra preset · 2.0 s of game time <img class="chip__plan" src="media/plans/table-wide-rack.svg" width="96" height="62" alt=""></p>
-  </div>
-  <ul class="tb__coasters coasters">
-    <li class="coaster"><svg class="coaster__rim" viewBox="0 0 100 100" aria-hidden="true"><path id="tb-rim" d="M50 15.5a34.5 34.5 0 1 1 0 69a34.5 34.5 0 1 1 0-69" fill="none"/><text><textPath href="#tb-rim" textLength="214">THE POWERJACK · 1414 W. FULTON ST. ·</textPath></text></svg>
-      <b class="coaster__n">1 <small>ms</small></b> <span class="coaster__l">One physics step</span></li>
-    <li class="coaster"><svg class="coaster__rim" viewBox="0 0 100 100" aria-hidden="true"><text><textPath href="#tb-rim" textLength="214">THE POWERJACK · 1414 W. FULTON ST. ·</textPath></text></svg>
-      <b class="coaster__n">7 <small>m/s</small></b> <span class="coaster__l">The cue ball’s top speed</span></li>
-    <li class="coaster"><svg class="coaster__rim" viewBox="0 0 100 100" aria-hidden="true"><text><textPath href="#tb-rim" textLength="214">THE POWERJACK · 1414 W. FULTON ST. ·</textPath></text></svg>
-      <b class="coaster__n">63.5 <small>%</small></b> <span class="coaster__l">Cushion nose height</span></li>
-    <li class="coaster"><svg class="coaster__rim" viewBox="0 0 100 100" aria-hidden="true"><text><textPath href="#tb-rim" textLength="214">THE POWERJACK · 1414 W. FULTON ST. ·</textPath></text></svg>
-      <b class="coaster__n" style="--n:.15">57.15 <small>mm</small></b> <span class="coaster__l">170 g a ball</span></li>
-  </ul>
-  <aside class="tb__sheet league" aria-labelledby="tb-sheet-h">
-    <p class="league__head">Fulton Street Thursday League · The break</p>
-    <h3 id="tb-sheet-h">What the table is made of</h3>
-    <ol class="tb__typed">
-      <li>Solver <span aria-hidden="true">.......</span> 3D rigid bodies, fixed 1 ms step</li>
-      <li>Balls <span aria-hidden="true">........</span> 57.15 mm, 170 g</li>
-      <li>Cushions <span aria-hidden="true">.....</span> noses at 63.5 % of ball height</li>
-      <li>Throw <span aria-hidden="true">........</span> Alciatore’s measured fit</li>
-      <li>Cue ball <span aria-hidden="true">.....</span> tops out at 7 m/s</li>
-      <li>Tuned <span aria-hidden="true">........</span> against real billiards data</li>
-    </ol>
-    <p class="tb__fine">Cushion noses are line segments at 63.5 % of ball height, so a cushion hit pushes the ball down into the cloth like a real K-66 rail. Every contact becomes its own sound at its own sub-frame moment, and a potted ball rolls down the return gully.</p>
-  </aside>
-  <figure class="tb__stills">
-    <div class="tb__three">
-      <figure><pj-frame name="table-wide-rack" sizes="(min-width: 900px) 30vw, 100vw" alt="The rack, just before the break."></pj-frame><figcaption>Rack.</figcaption></figure>
-      <figure><picture><source type="image/avif" srcset="media/seq/break-012.avif"><img src="media/seq/break-012.webp" width="1280" height="720" alt="Frame 13: the rack breaking apart." loading="lazy" decoding="async"></picture><figcaption>Thunder.</figcaption></figure>
-      <figure><picture><source type="image/avif" srcset="media/seq/break-059.avif"><img src="media/seq/break-059.webp" width="1280" height="720" alt="Frame 60: the balls spread across the table." loading="lazy" decoding="async"></picture><figcaption>Scatter.</figcaption></figure>
-    </div>
-    <details class="tb__video"><summary>Play the break (2 s)</summary>
-      <video controls muted playsinline preload="none" poster="media/seq/break-000.webp" width="1280" height="720"><source src="media/seq/break-1280.webm" type="video/webm"><source src="media/seq/break-1280.mp4" type="video/mp4"></video></details>
-    <figcaption class="tb__stills-cap">In-game frames · ultra preset · 2.0 s of game time</figcaption>
-  </figure>
 </section>

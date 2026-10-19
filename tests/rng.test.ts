@@ -1,6 +1,6 @@
 import { test } from 'node:test';
 import assert from 'node:assert/strict';
-import { mulberry32, fmix, gauss } from '../src/lib/rng.ts';
+import { mulberry32, fmix } from '../src/lib/rng.ts';
 
 test('mulberry32(1976) matches the game Rng for the first 5 draws', () => {
   const r = mulberry32(1976);
@@ -18,12 +18,4 @@ test('fmix is murmur3 fmix32', () => {
   assert.equal(fmix(0), 0);
   assert.equal(fmix(1), 1364076727);
   assert.equal(fmix(1976), 929783196);
-});
-
-test('gauss is a standard normal', () => {
-  const r = mulberry32(1976), n = 20000, xs = Array.from({ length: n }, () => gauss(r));
-  const mean = xs.reduce((s, x) => s + x, 0) / n, sd = Math.sqrt(xs.reduce((s, x) => s + (x - mean) ** 2, 0) / n);
-  assert.ok(Math.abs(mean) < .03, `mean ${mean}`);
-  assert.ok(Math.abs(sd - 1) < .03, `sd ${sd}`);
-  assert.ok(xs.every(Number.isFinite));
 });

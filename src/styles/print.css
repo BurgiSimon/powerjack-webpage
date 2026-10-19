@@ -1,8 +1,0 @@
-/* §E.15 starts minimal: paper, not a screen. The league-sheet print design lands in P6. */
-@media print {
-  html, body { background: #fff; color: var(--league-print); }
-  .strike, .skip, .hdr, .rail, .mb, .band, .grain, .pool, .cursor, canvas, .stage::before, .stage::after,
-  button, .chip, .fine, .coarse { display: none !important; }
-  .stage { background: none; }
-  a { color: inherit; }
-}

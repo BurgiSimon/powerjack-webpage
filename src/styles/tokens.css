@@ -1,109 +1,29 @@
-/* §B.1 tokens (art.md §1, verbatim) and §B.2 site additions. */
+/* The site's few tokens: the room's ink, its light, two faces, one ease. */
 :root {
   color-scheme: dark;
 
-  /* ---- ink & light (the room) ---- */
-  --black: #000;
+  /* ---- ink & light ---- */
   --ink: #17110C;
-  --ink-88: rgba(23, 17, 12, .88);
-  --ink-60: rgba(23, 17, 12, .6);
-  --smudge: rgba(12, 7, 3, .64);
-
-  /* ---- text on ink ---- */
-  --cream: #EFE4CC;              /* 14.8:1 */
+  --cream: #EFE4CC;              /* 14.8:1 on ink */
   --cream-dim: #B9AC92;          /*  8.4:1 */
-  --load-grey: #8D826D;
   --amber: #E8A23A;              /*  8.6:1 */
   --brass: #C9A55A;              /*  8.0:1 */
-  --neon: #FF4A2A;               /*  5.6:1  FOCUS, ALERTS AND THE LOGO ONLY */
-  --chalk: #6FA3E0;              /*  7.1:1 */
-  --felt: #3E9A68;               /*  5.4:1 */
-  --mb-red: #A3301A;             /*  5.6:1 on cream only */
-
-  /* ---- paper ---- */
-  --stock: #E8DCC0; --stock-edge: #CDBE9C; --tuck: #D9C9A5;
-  --print: #2B1B12;
-  --print-dim: #6B5643;
-  --striker: #4A3426;
-  --check: #E3EADB; --check-rule: #8FB79B; --check-print: #1F5A3A; --pencil: #34323C;
-  --check-red: #B2432F;
-  --league: #E6EBD9; --league-print: #1C3A2A; --league-head: #1F4D33; --league-rule: #2F6B48; --league-dim: #3D5B49;
-  --tape: #F3EFE4; --tape-print: #3A3631;
-  --strip: #F3EAD3; --strip-blue: #1E3E8C;
-  --napkin: #F2EEE4; --ballpoint: #24408F;
-  --slate: #26302B; --slate-chalk: #ECECE2;
-  --paper-skin: #D9CFB8;
-  --onionskin: #EEF0F2; --carbon: #2E3A8C;          /* site: carbon copies, 8.8:1 */
-
-  /* ---- room palette ---- */
-  --walnut: #5A3A24; --sapele: #6E3019; --oxblood: #6A221B; --flock: #621F2A; --flock-gold: #957C4B;
-  --nicotine: #8C7A5C; --brick: #5E3428; --oak: #5C3D27; --beam: #3F2A1D; --cherry: #794B2E;
-  --cloth: #1F6644; --harvest-gold: #B8862B; --burnt-orange: #A8461D; --avocado: #5B6330;
-  --ivory: #E9E1CC; --cig-paper: #ECE6D8; --cork: #C98A4B; --chalk-blue: #2A5AA8; --ash: #8F8A84; --slate-room: #303C35;
-  --neon-cold-beer: #3F73FF;
-
-  /* ---- ball colours (sacred) ---- */
-  --b1: #F2B705; --b2: #1F3E9C; --b3: #C8102E; --b4: #6A2A86; --b5: #E2591E; --b6: #0E6B3A; --b7: #7A1F1F; --b8: #141414;
-  --b-ivory: #EDE3CB; --b-disc: #F1E9D6;
-
-  /* ---- friends' tints (6.6:1 on ink; never the only marker) ---- */
-  --tint-0: #8097DF; --tint-1: #DD7C92; --tint-2: #B889C7; --tint-3: #9C9B84; --tint-4: #24AAA9; --tint-5: #2AA5D4;
-
-  /* ---- foil ---- */
+  --neon: #FF4A2A;               /*  5.6:1  focus only */
   --foil: linear-gradient(90deg, #8A6A2C, #E9CF8A 22%, #B8913F 40%, #F4E2A8 58%, #9C7733 80%, #D9B970);
 
   /* ---- type ---- */
-  --f-display: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;          /* site: metric fallback (§B.3) */
-  --f-hud: 'Barlow Condensed', 'Barlow Fallback', 'Arial Narrow', sans-serif;     /* site: metric fallback (§B.3) */
-  --f-paper: 'Courier Prime', 'Courier New', monospace;
-  --f-chalk: 'PJ Chalk', 'Caveat Brush', cursive;   /* site: renamed Cabin Sketch subset */
-  --f-hand: 'Caveat Brush', cursive;
+  --f-display: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;          /* metric fallback: CLS 0 */
+  --f-hud: 'Barlow Condensed', 'Barlow Fallback', 'Arial Narrow', sans-serif;
+  --fs-mega:  clamp(3.75rem, 1rem + 9vw, 10rem);       /* h1 gold leaf, Fraunces 900, lh .92 */
+  --fs-h2:    clamp(2.75rem, 1.5rem + 5vw, 6.5rem);    /* Fraunces 800, lh 1 */
+  --fs-quote: clamp(1.6rem, 1.1rem + 2.2vw, 3.2rem);   /* Fraunces italic 400 */
+  --fs-line:  clamp(1.125rem, .9rem + .9vw, 1.6rem);   /* Fraunces italic 400 */
+  --fs-label: .8125rem;                                /* Barlow 600 caps .22em */
 
-  /* ---- motion ---- */
-  --ease: cubic-bezier(.2, .7, .2, 1);
-  --t-fast: 140ms; --t-ui: 200ms; --t-drop: 220ms; --t-out: 300ms;
-  --t-chalk: 250ms; --t-pencil: 300ms; --t-toast-hold: 2.4s;
-  --t-loader-out: 700ms; --t-backdrop: 450ms;
-  --drop-y: -8px; --drop-tilt: -1.5deg;
-
-  /* ---- focus ---- */
+  /* ---- space, layers, motion ---- */
+  --gutter: clamp(16px, 2.5vw, 40px);
+  --z-header: 40;
+  --ease: cubic-bezier(.2, .7, .2, 1);                 /* 'house' in GSAP */
   --focus-w: 2px; --focus-off: 3px;
   --focus-glow: 0 0 14px rgba(255, 74, 42, .45);
-
-  /* ---- paper tooth & fibre (verbatim from the game's base.css) ---- */
-  --tooth: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .32 0 0 0 0 .24 0 0 0 0 .14 0 0 0 .38 -.08'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
-  --fibre: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='400' height='400'%3E%3Cfilter id='f'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.012 .22' numOctaves='2' seed='4' stitchTiles='stitch'/%3E%3CfeColorMatrix values='0 0 0 0 .4 0 0 0 0 .3 0 0 0 0 .18 0 0 0 .22 -.06'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23f)'/%3E%3C/svg%3E");
 }
-
-:root {
-  /* type scale (rem; 1rem = 16px; holds at 200 % zoom) */
-  --fs-mega:   clamp(4rem, 1.5rem + 11vw, 13rem);      /* hero gold leaf, Fraunces 900, lh .92, ls -.015em */
-  --fs-h2:     clamp(2.25rem, 1.4rem + 3.8vw, 5rem);   /* Fraunces 800, lh 1.02 */
-  --fs-h3:     clamp(1.375rem, 1.1rem + 1.1vw, 2rem);  /* Fraunces 800 or Barlow 700 caps on paper */
-  --fs-quote:  clamp(1.5rem, 1.1rem + 1.9vw, 2.75rem); /* Fraunces italic 400 */
-  --fs-lede:   clamp(1.25rem, 1rem + 1vw, 1.75rem);    /* Fraunces italic 400 */
-  --fs-body:   clamp(1.0625rem, 1rem + .25vw, 1.1875rem); /* Fraunces 400, lh 1.55, max 62ch */
-  --fs-small:  .9375rem;
-  --fs-typed:  clamp(.9375rem, .88rem + .25vw, 1.0625rem); /* Courier Prime, lh 1.45 */
-  --fs-label:  .8125rem;                               /* Barlow 600 caps, .14em */
-  --fs-eyebrow: .75rem;                                /* Barlow 600 caps, .22em */
-  --fs-micro:  .6875rem;                               /* chips, Barlow 600 caps .14em; never smaller */
-
-  /* space */
-  --s-1: .25rem; --s-2: .5rem; --s-3: .75rem; --s-4: 1rem; --s-5: 1.5rem; --s-6: 2rem; --s-7: 3rem; --s-8: 4.5rem; --s-9: 7rem;
-  --gutter: clamp(16px, 2.5vw, 40px);
-  --maxw: 1440px;
-  --sec-pad: clamp(4.5rem, 9vh, 8rem);
-  --hdr-h: 64px;                                       /* 56px under 900px */
-
-  /* layers */
-  --z-pool: 0; --z-content: 1; --z-stage-ui: 3; --z-rail: 30; --z-header: 40; --z-sub: 45;
-  --z-grain: 50; --z-cursor: 90; --z-loader: 100;      /* the <dialog> uses the top layer */
-
-  /* motion (GSAP mirrors these; see core/motion.ts) */
-  --t-reveal: 900ms;
-
-  /* grain: zero-mean neutral noise, rasterised once per tile */
-  --grain: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='256' height='256'%3E%3Cfilter id='g'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/%3E%3CfeColorMatrix values='.33 .33 .33 0 0 .33 .33 .33 0 0 .33 .33 .33 0 0 0 0 0 0 1'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23g)'/%3E%3C/svg%3E");
-}
-@media (max-width: 899.98px) { :root { --hdr-h: 56px; } }
