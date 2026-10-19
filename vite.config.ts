@@ -2,7 +2,7 @@ import { defineConfig, type Plugin } from 'vite';
 import { existsSync, readFileSync } from 'node:fs';
 
 type Frame = { w: number; h: number; sizes: number[]; focal: [number, number]; ph: string; alt: string };
-export type Clip = { w: number; h: number; loop: boolean; files: { mp4: string; webm: string } };
+export type Clip = { w: number; h: number; loop: boolean; files: { mp4: string; webm: string }; poster?: string };
 const json = <T>(p: string): T => JSON.parse(readFileSync(p, 'utf8'));
 const SITE = process.env.SITE_URL ?? './';                       // set by the Pages workflow; './' locally
 const esc = (s: string) => s.replace(/&/g, '&amp;').replace(/"/g, '&quot;').replace(/</g, '&lt;');
@@ -21,12 +21,15 @@ function frame(a: Record<string, string>, frames: Record<string, Frame>): string
     ('eager' in a ? ' fetchpriority="high"' : ' loading="lazy"') + ` decoding="async" style="${style}"></picture>`;
 }
 
-// <pj-video name class hero manual> → a muted inline <video>, or nothing when the clip is not on disk (the still underneath stands in)
+// <pj-video name class manual> → a muted inline <video>, or nothing when the clip is not on disk (the still underneath stands in).
+// A poster is the clip's own first frame, for a clip whose opening shot differs from the still under it (base.css: no
+// dissolve); core/clip sets it only in motion, so the static branch never fetches it
 export function video(a: Record<string, string>, clips: Record<string, Clip> | null, pub = 'public'): string {
   const c = clips?.[a.name];
   if (!c || !c.files?.webm || !c.files?.mp4 || ![c.files.webm, c.files.mp4].every(f => existsSync(`${pub}/${f}`))) return '';
   return `<video class="clip${a.class ? ` ${a.class}` : ''}" data-clip="${a.name}"${'manual' in a ? ' data-manual' : ''} muted playsinline` +
-    ` disablepictureinpicture disableremoteplayback${c.loop ? ' loop' : ''} preload="${'hero' in a ? 'metadata' : 'none'}"` +
+    ` disablepictureinpicture disableremoteplayback${c.loop ? ' loop' : ''} preload="none"` +
+    (c.poster && existsSync(`${pub}/${c.poster}`) ? ` data-poster="${c.poster}"` : '') +
     ` width="${c.w}" height="${c.h}" aria-hidden="true"><source src="${c.files.webm}" type="video/webm">` +
     `<source src="${c.files.mp4}" type="video/mp4"></video>`;
 }

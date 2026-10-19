@@ -1,5 +1,5 @@
 /* #fulton · the glass: the room through rain-beaded storefront glass; the title on the dark floor, never on the lit table. */
-.fulton { --hold: 100svh; }   /* ≥ a viewport: the next scene never starts inside the first view, so nothing shifts when motion turns on */
+.fulton { --hold: 55svh; }   /* the title leaves, the dolly-in carries on, the shot comes in: no dead scroll */
 /* the opening beat: the three shades come on and the gold leaf catches them. CSS, so the first paint is already dim (never
    a flash) and the text is there from it (the LCP waits for nothing); the static branch skips it */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
@@ -17,7 +17,8 @@
 /* the shader draws both: the mist (over the canvas) fades as the glass fades in, the clip (under it) goes once covered */
 .fulton:has(canvas[data-live]) :is(.fulton__clip, .fulton__mist) { opacity: 0; }
 .fulton:has(canvas[data-live]) .fulton__clip { transition: opacity 0s .8s; }
-@media (max-aspect-ratio: 3/4) { .fulton__clip { display: none; } }   /* portrait phones keep the portrait still: no clip bytes */
+/* portrait phones keep the portrait still (no clip bytes), so only the dolly-in moves it: the shot comes in sooner */
+@media (max-aspect-ratio: 3/4) { .fulton { --hold: 35svh; } .fulton__clip { display: none; } }
 
 /* --sink is the exit scrub's: a GSAP y would bake this -50% into px and the title would drift off centre on resize */
 .fulton__title { --sink: 0vh; left: 50%; bottom: 9svh; translate: -50% var(--sink); display: grid; justify-items: center; width: max-content;

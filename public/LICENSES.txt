@@ -1,8 +1,8 @@
 THE POWERJACK · LICENCES
 ========================
 
-Third-party work this page uses, each with its licence. The pictures and clips are the game's own renders; the rain glass,
-the smoke and the sign's wake-up are this page's.
+Third-party work this page uses, each with its licence. The pictures and clips are the game's own renders; the rain glass
+and the sign's wake-up are this page's.
 
 
 1. TYPE · SIL Open Font License 1.1
@@ -104,15 +104,7 @@ FROM, OUT OF THE USE OR INABILITY TO USE THE FONT SOFTWARE OR FROM
 OTHER DEALINGS IN THE FONT SOFTWARE.
 
 
-2. SMOKE · Kenney, CC0 1.0
---------------------------
-
-Created and distributed by Kenney (www.kenney.nl).
-- Smoke Particles: two white puffs (as WebP masks).
-License: Creative Commons Zero, CC0 1.0. https://creativecommons.org/publicdomain/zero/1.0/
-
-
-3. CODE
+2. CODE
 -------
 
 Lenis (smooth scroll) · MIT License

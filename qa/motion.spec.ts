@@ -12,6 +12,7 @@ test('reduced motion: no pins, no live canvas, clips never start, no hidden text
   await page.waitForFunction(() => (window as any).__pj);
   await page.waitForTimeout(1500);
   expect(await page.evaluate(sticky)).toEqual([]);
+  expect(await page.evaluate(() => (window as any).__pj.lenis.options.smoothWheel)).toBe(false);   // the wheel scrolls as the OS does
   await expect(page.locator('canvas[data-live]')).toHaveCount(0);
   expect(await page.$$eval('video', (vs) => vs.filter((v) => !v.paused || v.currentTime !== 0).length)).toBe(0);
   const hidden = await page.evaluate(() => {

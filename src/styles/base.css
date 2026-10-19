@@ -63,10 +63,16 @@ picture img { background-size: cover; background-position: center; }   /* the in
 html.motion .scene { height: calc(100svh + var(--hold) + var(--fade)); pointer-events: none; }   /* boxes and stages overlap: only the hero's glass and the one link take the pointer */
 html.motion .scene + .scene { margin-top: calc(-100svh - var(--fade)); }
 html.motion .scene > .stage { position: sticky; inset: 0 auto auto; height: 100svh; }
+/* until main.ts picks the branch, the scenes under the first view are not painted: in motion the next one moves up into it, and
+   a box that was never painted does not count as a shift (CLS). Should main.ts never run, they show after 4 s */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  html:not(.still, .motion) .scene + .scene { visibility: hidden; animation: shown 0s 4s forwards; }
+}
+@keyframes shown { to { visibility: visible; } }
 
 /* clips dissolve in over their still on the first real frame (core/clip.ts) */
 .clip { opacity: 0; transition: opacity .8s var(--ease); }
-.clip.is-on { opacity: 1; }
+.clip.is-on, .clip[poster] { opacity: 1; }   /* a poster is the clip's own first frame: it starts there, nothing to dissolve */
 html:not(.motion) :is(.motion-only, .clip) { display: none; }
 html.motion .static-only { display: none; }
 

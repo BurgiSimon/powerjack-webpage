@@ -1,12 +1,7 @@
-/* The sign, and Old Jack. Layers bottom → top: lit still, unlit still, the wake (V5), his haze, the quote. */
-.sign { --hold: 80svh; }   /* the dissolve, then room for the haze to rise and the wake to fire */
+/* The sign, and Old Jack. Layers bottom → top: lit still, unlit still, the wake (V5), the quote. */
+.sign { --hold: 80svh; }   /* the dissolve, the dark sign, the wake, then time to read him */
 .sg__media, .sg__wake { position: absolute; inset: 0; }
 .sg__media video { object-position: 48% 42%; }   /* the stills' focal (frames.json), so the clips land on them exactly */
-/* the game's own Jack haze (ai/ghost.ts), not a cigarette; rises from low left, where he would stand. The blur turns the
-   particle sprite's hard core into haze (static, so the compositor keeps it) */
-.sg__smoke { position: absolute; left: -8vmin; bottom: -14vmin; width: 70vmin; height: auto; pointer-events: none; visibility: hidden;
-  mix-blend-mode: screen; filter: sepia(1) saturate(3) hue-rotate(-18deg) brightness(.45) blur(18px); will-change: transform, opacity; }
-.sg__smoke--b { left: 14vmin; bottom: -22vmin; }
 /* the quote sits on the dark wainscot right of the jukebox, never on its glow */
 .sg__quote { right: var(--gutter); bottom: 9svh; width: min(7.6em, 100% - 2 * var(--gutter)); font-size: var(--fs-quote); }
 .sg__quote blockquote { margin: 0; }

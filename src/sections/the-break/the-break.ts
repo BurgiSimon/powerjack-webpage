@@ -36,17 +36,18 @@ export const init: Init = () => {
   const mm = gsap.matchMedia();
   mm.add({ go: Q.motion, tall: '(max-aspect-ratio: 3/4)' }, (c) => {
     if (!c.conditions!.go) return;
-    // the break is the third scene, so a trigger further out would fire at load: start once the visitor scrolls; any toggle,
-    // so a page restored below loads too
-    ScrollTrigger.create({ trigger: sec, start: 'top 140%', onToggle: load });
-    // half dissolved in → the end of the hold (base.css): sixty frames, then the last one holds while the sign comes in
-    const range = { trigger: sec, start: 'top -15%', end: 'bottom 135%' };
-    ScrollTrigger.create({ ...range, onUpdate: (s) => draw(Math.round(s.progress * (N - 1))) });
+    // the break is the third scene (130svh down on phones), so a trigger further out would fire at load: start once the
+    // visitor scrolls; any toggle, so a page restored below loads too
+    ScrollTrigger.create({ trigger: sec, start: 'top 110%', onToggle: load });
+    // the hard cut (main.ts) → the end of the hold (base.css): sixty frames, then the last one holds while the sign comes in.
+    // Eased in, so the cue ball's run at the rack (frames 0–6) gets twice its share and the impact lands
+    const range = { trigger: sec, start: 'top top', end: 'bottom 112%' };
+    ScrollTrigger.create({ ...range, onUpdate: (s) => draw(Math.round(s.progress ** 1.5 * (N - 1))) });
     // a portrait screen shows a quarter of the frame: the camera pans left with the burst
     if (c.conditions!.tall) gsap.fromTo(cv, { objectPosition: '64% 60%' }, { objectPosition: '42% 60%', ease: 'none', scrollTrigger: { ...range, scrub: true } });
     // the cut to the sign: the camera tilts up off the table (zooming just enough that the frame's top edge never shows)
     gsap.to(sec.querySelector('.stage'), { yPercent: 10, scale: 1.1, transformOrigin: '50% 100%', ease: 'none',
-      scrollTrigger: { trigger: '#sign', start: 'top top', end: 'top -35%', scrub: true } });
+      scrollTrigger: { trigger: '#sign', start: 'top top', end: 'top -12%', scrub: true } });
   });
   return () => mm.revert();
 };

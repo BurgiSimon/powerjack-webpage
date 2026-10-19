@@ -21,6 +21,7 @@
    "mp4": "media/video/the-shot-720.mp4",
    "webm": "media/video/the-shot-720.webm"
   },
+  "poster": "media/video/the-shot-poster.webp",
   "desc": "Real in-game render, first person: you lean down over the cue ball, the bridge hand plants, two slow practice strokes, and it ends on the final stroke a hair before the cue meets the ball (the break itself is the next scene)."
  },
  "rain-window": {

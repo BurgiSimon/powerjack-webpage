@@ -12,6 +12,7 @@ export function play(v: HTMLVideoElement): void {
 
 export function initClips(): void {
   if (!CAN_PLAY) return;
+  for (const v of document.querySelectorAll<HTMLVideoElement>('video[data-poster]')) v.poster = v.dataset.poster!;
   const io = new IntersectionObserver((es) => {
     for (const e of es) {
       const v = e.target as HTMLVideoElement;

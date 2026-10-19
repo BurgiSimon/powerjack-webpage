@@ -1,29 +1,17 @@
 {
  "room-wide": {
-  "w": 1920,
-  "h": 1080,
+  "w": 1280,
+  "h": 720,
   "sizes": [
    960,
-   1920
+   1280
   ],
   "focal": [
    0.5,
    0.5
   ],
-  "ph": "data:image/jpeg;base64,/9j/2wBDABALDA4MChAODQ4SERATGCgaGBYWGDEjJR0oOjM9PDkzODdASFxOQERXRTc4UG1RV19iZ2hnPk1xeXBkeFxlZ2P/2wBDARESEhgVGC8aGi9jQjhCY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2P/wAARCAAOABgDASIAAhEBAxEB/8QAFwAAAwEAAAAAAAAAAAAAAAAAAAMEBv/EACEQAAICAgEEAwAAAAAAAAAAAAECAxEABCESEzFRMmKB/8QAFwEAAwEAAAAAAAAAAAAAAAAAAAECA//EABYRAQEBAAAAAAAAAAAAAAAAAAARIf/aAAwDAQACEQMRAD8AymzHFHKVjLEA1ZHke8ZNqxRq57hPT9fP7kSTEOWPOUdxdmZECUzECyeMiNLharE0fzqTqoAjiveGM2YH1NqTWcRlkNFlvDAn/9k=",
-  "alt": "In-game frame from the window corner: the pool table lit under three slag-glass shades, the POWERJACK neon over the glowing jukebox, the dartboard, stools and ceiling beams.",
-  "preset": "ultra",
-  "eye": [
-   4.9,
-   1.25,
-   2.9
-  ],
-  "at": [
-   -1,
-   -0.1,
-   -0.6
-  ],
-  "fov": 62
+  "ph": "data:image/jpeg;base64,/9j/4AAQSkZJRgABAQAAAQABAAD/2wBDABcQERQRDhcUEhQaGBcbIjklIh8fIkYyNSk5UkhXVVFIUE5bZoNvW2F8Yk5QcptzfIeLkpSSWG2grJ+OqoOPko3/2wBDARgaGiIeIkMlJUONXlBejY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY2NjY3/wAARCAAOABgDASIAAhEBAxEB/8QAGAAAAwEBAAAAAAAAAAAAAAAAAAMEAgb/xAAfEAEAAgICAgMAAAAAAAAAAAABAAIDERMhIjFhcZH/xAAWAQEBAQAAAAAAAAAAAAAAAAACAAH/xAAXEQEBAQEAAAAAAAAAAAAAAAAAAREh/9oADAMBAAIRAxEAPwDn6FLZ6mvFSUXxYqt3WTVVOgT9k2GwIpvuNy0Hy9fUOHvCsNsXKc22vxCY3QdtVITLFH//2Q==",
+  "alt": "In-game frame from behind the bar: the pool table lit under three slag-glass shades, the POWERJACK neon over the glowing jukebox, the dartboard and the bar stools."
  },
  "portrait-table": {
   "w": 1080,

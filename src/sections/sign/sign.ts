@@ -1,13 +1,12 @@
 import './sign.css';
-import { gsap, Q, reveal } from '../../core/motion';
+import { gsap, ScrollTrigger, Q, reveal } from '../../core/motion';
 import { play } from '../../core/clip';
 import type { Init } from '../../core/types';
 
-// Old Jack's haze drifts up past the dark sign, then the sign wakes (V5) and stays lit
+// the dark sign holds, then wakes (V5) and stays lit; Old Jack has the last word
 export const init: Init = () => {
   const sec = document.getElementById('sign')!, q = <T extends Element>(s: string) => sec.querySelector<T>(s);
   const wake = q<HTMLVideoElement>('.sg__wake video');
-  const smoke = sec.querySelectorAll('.sg__smoke');
 
   const mm = gsap.matchMedia();
   mm.add(Q.motion, () => {
@@ -18,8 +17,8 @@ export const init: Init = () => {
     // a V5 that cannot load (every <source> fails, the last one reports it) leaves the wake-up to the stills too
     const src = wake?.querySelector('source:last-of-type'), failed = () => { if (woken) fade.play(); };
     src?.addEventListener('error', failed);
-    // its own dissolve → the end of its hold (base.css): the haze rises as the sign comes in, and it wakes once it is all there
-    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom 135%', scrub: 1,
+    // its own dissolve → the end of its hold (base.css): it wakes once it is all there
+    ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom 112%',
       onUpdate: (s) => {
         if (!woken && s.progress >= .45) {
           woken = true;
@@ -30,9 +29,7 @@ export const init: Init = () => {
           fade.reverse();
           if (wake) { wake.pause(); wake.currentTime = 0; wake.classList.remove('is-on'); }
         }
-      } } });
-    tl.fromTo(smoke, { autoAlpha: 0, y: '30vh', x: 0, scale: .8 }, { autoAlpha: .5, y: '-5vh', x: '12vw', scale: 1.7, duration: .55, stagger: .08 }, 0)
-      .to(smoke, { autoAlpha: .15, y: '-30vh', x: '18vw', scale: 2.1, duration: .37, stagger: .08 }, .55);
+      } });
 
     // with the wake (45 % of the hold)
     reveal(q('.sg__quote p')!, 'top -38%', sec);

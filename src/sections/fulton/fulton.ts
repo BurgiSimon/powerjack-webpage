@@ -13,7 +13,7 @@ export const init: Init = () => {
       scrollTrigger: { trigger: sec, start: 'top top', end: 'top -20%', scrub: true } });
     // a slow dolly-in toward the table, all the way into the dissolve to the shot
     gsap.to(sec.querySelector('.stage'), { scale: 1.16, transformOrigin: '51% 58%', ease: 'none',
-      scrollTrigger: { trigger: sec, start: 'top top', endTrigger: '#get-down', end: 'top -35%', scrub: true } });
+      scrollTrigger: { trigger: sec, start: 'top top', endTrigger: '#get-down', end: 'top -12%', scrub: true } });
 
     // the glass waits for load and an idle moment: the still is the LCP, the shader is a bonus
     let glass: Glass | null = null, gone = false;
