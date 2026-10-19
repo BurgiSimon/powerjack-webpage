@@ -6,7 +6,7 @@ import type { Init } from '../../core/types';
 
 const N = 60;   // media/seq/break-000 … 059, 1280×720, the game's own break
 
-// sixty real frames on a 2D canvas, scrubbed by the pin; frames stream in coarse-to-fine, the nearest loaded one stands in
+// sixty real frames on a 2D canvas, scrubbed through the scene's hold; frames stream in coarse-to-fine, the nearest loaded one stands in
 export const init: Init = () => {
   const sec = document.getElementById('the-break')!, cv = sec.querySelector<HTMLCanvasElement>('.tb__seq')!, g = cv.getContext('2d')!;
   const got: HTMLImageElement[] = [];
@@ -34,11 +34,19 @@ export const init: Init = () => {
   };
 
   const mm = gsap.matchMedia();
-  mm.add(Q.motion, () => {
-    // the break sits two viewports down, so 200 % would fire at load: start once the visitor scrolls; any toggle, so a page restored below loads too
-    ScrollTrigger.create({ trigger: sec, start: 'top 175%', onToggle: load });
-    ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom bottom',   // the sticky stretch (.pin in base.css)
-      onUpdate: (s) => draw(Math.round(s.progress * (N - 1))) });
+  mm.add({ go: Q.motion, tall: '(max-aspect-ratio: 3/4)' }, (c) => {
+    if (!c.conditions!.go) return;
+    // the break is the third scene, so a trigger further out would fire at load: start once the visitor scrolls; any toggle,
+    // so a page restored below loads too
+    ScrollTrigger.create({ trigger: sec, start: 'top 140%', onToggle: load });
+    // half dissolved in → the end of the hold (base.css): sixty frames, then the last one holds while the sign comes in
+    const range = { trigger: sec, start: 'top -15%', end: 'bottom 135%' };
+    ScrollTrigger.create({ ...range, onUpdate: (s) => draw(Math.round(s.progress * (N - 1))) });
+    // a portrait screen shows a quarter of the frame: the camera pans left with the burst
+    if (c.conditions!.tall) gsap.fromTo(cv, { objectPosition: '64% 60%' }, { objectPosition: '42% 60%', ease: 'none', scrollTrigger: { ...range, scrub: true } });
+    // the cut to the sign: the camera tilts up off the table (zooming just enough that the frame's top edge never shows)
+    gsap.to(sec.querySelector('.stage'), { yPercent: 10, scale: 1.1, transformOrigin: '50% 100%', ease: 'none',
+      scrollTrigger: { trigger: '#sign', start: 'top top', end: 'top -35%', scrub: true } });
   });
   return () => mm.revert();
 };

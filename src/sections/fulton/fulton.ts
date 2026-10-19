@@ -7,9 +7,13 @@ export const init: Init = () => {
   const mm = gsap.matchMedia();
   mm.add(Q.motion, () => {
     const sec = document.getElementById('fulton')!, canvas = sec.querySelector('canvas')!, img = sec.querySelector('img')!;
-    const clip = sec.querySelector('video'), view = ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom top' });
-    gsap.to('.fulton__title', { '--sink': '8vh', autoAlpha: 0, ease: 'none',   // sinks into the mist, never past the scene's edge
-      scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom 35%', scrub: true } });
+    // in view until the next scene has dissolved over it (base.css: the stage sticks till the section's bottom meets the viewport's)
+    const clip = sec.querySelector('video'), view = ScrollTrigger.create({ trigger: sec, start: 'top bottom', end: 'bottom bottom' });
+    gsap.to('.fulton__title', { '--sink': '14vh', opacity: 0, ease: 'none',   // sinks into the mist, quickly: never a ghost over the cloth
+      scrollTrigger: { trigger: sec, start: 'top top', end: 'top -20%', scrub: true } });
+    // a slow dolly-in toward the table, all the way into the dissolve to the shot
+    gsap.to(sec.querySelector('.stage'), { scale: 1.16, transformOrigin: '51% 58%', ease: 'none',
+      scrollTrigger: { trigger: sec, start: 'top top', endTrigger: '#get-down', end: 'top -35%', scrub: true } });
 
     // the glass waits for load and an idle moment: the still is the LCP, the shader is a bonus
     let glass: Glass | null = null, gone = false;

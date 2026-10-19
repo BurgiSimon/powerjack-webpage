@@ -1,6 +1,13 @@
 /* Last call: inside, looking out at the rain. Two lines on the ledge, the credits at the foot. */
+.last-call { --hold: 50svh; }
 .lc__media { position: absolute; inset: 0; }
-.lc__media video { object-position: 32% 47%; }   /* window-rain's focal: COLD BEER stays in frame on phones */
+.lc__media video { object-position: 32% 47%; }   /* window-rain's focal (the still's, from frames.json) */
+/* a portrait screen shows a quarter of the frame: keep the whole COLD BEER and the rain-lit pane in it (beats the inline focal) */
+@media (max-aspect-ratio: 3/4) { .lc__media :is(img, video) { object-position: 22% 50% !important; } }
+/* the frame's top corner is rain-lit glass that lightning flares: a film's corner vignette there keeps the Motion switch
+   readable (≥ 4.5:1) without a pool of its own (base.css's vignette, plus the corner) */
+.lc__stage::before { background: radial-gradient(ellipse min(26rem, 70vw) 16rem at 100% 0, rgba(12, 7, 3, .85), rgba(12, 7, 3, .6) 35%, transparent),
+  radial-gradient(ellipse 120% 100% at 50% 45%, transparent 55%, rgba(12, 7, 3, .45)); }
 /* on the dark ledge, under the window: COLD BEER and the rain stay clear above it */
 .lc__copy { left: 50%; bottom: max(14svh, 5.5rem); translate: -50% 0; width: min(100% - 2 * var(--gutter), 18ch); text-align: center;
   font-size: var(--fs-h2); }
@@ -8,5 +15,5 @@
 .lc__line { margin-top: .75rem; font: italic 400 var(--fs-line)/1.3 var(--f-display); color: var(--cream); text-wrap: balance; }
 .lc__foot { position: absolute; z-index: 3; left: 50%; bottom: calc(1.25rem + env(safe-area-inset-bottom)); translate: -50% 0;
   width: min(100% - 2 * var(--gutter), 64rem); text-align: center; text-wrap: balance;
-  font: 600 .75rem/1.6 var(--f-hud); letter-spacing: .14em; text-transform: uppercase; color: var(--cream-dim); }
+  font: 600 .75rem/1.6 var(--f-hud); letter-spacing: .12em; text-transform: uppercase; color: var(--cream-dim); opacity: .8; pointer-events: auto; }
 .lc__foot a { display: inline-block; padding-block: 13px; margin-block: -13px; color: var(--cream); }

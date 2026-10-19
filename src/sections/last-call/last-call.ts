@@ -8,9 +8,9 @@ export const init: Init = () => {
   const mm = gsap.matchMedia();
   mm.add(Q.motion, () => {
     gsap.fromTo(sec.querySelector('.lc__media'), { scale: 1.08 }, { scale: 1, ease: 'none',
-      scrollTrigger: { trigger: sec, start: 'top bottom', end: 'bottom bottom', scrub: true } });
-    reveal(sec.querySelector('h2')!);
-    reveal(sec.querySelector('.lc__line')!);
+      scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: true } });   // its dissolve → the page's end
+    reveal(sec.querySelector('h2')!, 'top -20%', sec);   // the stage sticks: time the words by the scene, not their own box
+    reveal(sec.querySelector('.lc__line')!, 'top -25%', sec);
   });
   return () => mm.revert();
 };

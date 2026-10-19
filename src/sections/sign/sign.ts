@@ -18,7 +18,8 @@ export const init: Init = () => {
     // a V5 that cannot load (every <source> fails, the last one reports it) leaves the wake-up to the stills too
     const src = wake?.querySelector('source:last-of-type'), failed = () => { if (woken) fade.play(); };
     src?.addEventListener('error', failed);
-    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom bottom', scrub: 1,
+    // its own dissolve → the end of its hold (base.css): the haze rises as the sign comes in, and it wakes once it is all there
+    const tl = gsap.timeline({ defaults: { ease: 'none' }, scrollTrigger: { trigger: sec, start: 'top top', end: 'bottom 135%', scrub: 1,
       onUpdate: (s) => {
         if (!woken && s.progress >= .45) {
           woken = true;
@@ -33,9 +34,11 @@ export const init: Init = () => {
     tl.fromTo(smoke, { autoAlpha: 0, y: '30vh', x: 0, scale: .8 }, { autoAlpha: .5, y: '-5vh', x: '12vw', scale: 1.7, duration: .55, stagger: .08 }, 0)
       .to(smoke, { autoAlpha: .15, y: '-30vh', x: '18vw', scale: 2.1, duration: .37, stagger: .08 }, .55);
 
-    // 13 % into the scene's scroll = 43 % through the pin, with the wake
-    reveal(q('.sg__quote p')!, 'top -13%', sec);
-    gsap.from(q('.sg__quote figcaption'), { autoAlpha: 0, duration: .9, delay: .3, scrollTrigger: { trigger: sec, start: 'top -13%', once: true } });
+    // with the wake (45 % of the hold)
+    reveal(q('.sg__quote p')!, 'top -38%', sec);
+    gsap.from(q('.sg__quote figcaption'), { opacity: 0, duration: .9, delay: .3, scrollTrigger: { trigger: sec, start: 'top -38%', once: true } });
+    // and leaves before the cut to last call
+    gsap.to(q('.sg__quote'), { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#last-call', start: 'top top', end: 'top -12%', scrub: true } });
     return () => src?.removeEventListener('error', failed);
   });
   return () => mm.revert();

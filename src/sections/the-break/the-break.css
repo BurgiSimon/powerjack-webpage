@@ -1,3 +1,5 @@
 /* The break: no words, no chrome, sixty frames full bleed. The canvas and both stills crop alike. */
-.the-break { --pin: 60svh; }   /* the page's peak: 60 frames over the longer pin */
-.tb__stage :is(canvas, img) { object-position: 64% 60%; }   /* the rack centred in a portrait crop (spec 58 % left it on the edge) */
+.the-break { --hold: 100svh; }   /* the page's peak: 60 frames over a full viewport of scroll */
+.tb__stage :is(canvas, img) { object-position: 64% 60%; }   /* the rack centred in a portrait crop (phones pan left with the burst: the-break.ts) */
+/* the frames slice the POWERJACK neon at their top edge; on wide screens zoom past it (the next scene shows it whole) */
+@media (min-aspect-ratio: 1/1) { .tb__stage :is(canvas, img) { scale: 1.07; transform-origin: 50% 100%; } }

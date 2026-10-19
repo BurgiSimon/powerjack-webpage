@@ -46,21 +46,23 @@ html.still *, html.still *::before, html.still *::after { animation-duration: .0
   animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
 html.still :focus-visible { animation: none; }
 
-/* ---- scenes: one viewport each, full bleed, meeting on ink ---- */
-.scene { position: relative; height: 100svh; overflow: clip; isolation: isolate; background: var(--ink); }
+/* ---- scenes: full bleed; static (reduced motion, Motion off, no JS) one viewport each ---- */
+.scene { position: relative; height: 100svh; overflow: clip; isolation: isolate; }
 .stage { position: absolute; inset: 0; overflow: clip; isolation: isolate; background: var(--ink); }
 .stage :is(picture, video, canvas), .stage picture img { position: absolute; inset: 0; width: 100%; height: 100%; }
 .stage :is(picture img, video, canvas) { object-fit: cover; }
 picture img { background-size: cover; background-position: center; }   /* the inline placeholder stretches while a frame loads */
-.stage::before, .stage::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
-.stage::before { background: linear-gradient(var(--ink), transparent) top / 100% 12vh no-repeat,
-  radial-gradient(ellipse 120% 100% at 50% 45%, transparent 55%, rgba(12, 7, 3, .45)); }
-.stage::after { top: auto; height: 12vh; background: linear-gradient(transparent, var(--ink)); }
+.stage::before, html:not(.motion) .stage::after { content: ''; position: absolute; inset: 0; z-index: 2; pointer-events: none; }
+.stage::before { background: radial-gradient(ellipse 120% 100% at 50% 45%, transparent 55%, rgba(12, 7, 3, .45)); }
+.stage::after { background: linear-gradient(var(--ink), transparent 12vh calc(100% - 12vh), var(--ink)); }   /* static scenes stack: they meet on ink */
 
-/* a pinned scene (motion only): taller by its --pin while its stage sticks. Native sticky, not a fixed ScrollTrigger pin:
-   nothing shifts (CLS 0) and nothing jumps when touch, keys or the scrollbar move the page */
-html.motion .pin { height: calc(100svh + var(--pin)); }
-html.motion .pin > .stage { position: sticky; inset: 0 auto auto; height: 100svh; }
+/* motion: one continuous shot. Every stage sticks while its scene runs, and each scene starts a viewport (+ --fade) before
+   the last one lets go, so it dissolves in over a held frame (main.ts) instead of sliding up under a seam. A scene leads
+   for its --hold (its own dissolve included); the page is 100svh + Σ --hold + --fade. Native sticky, not ScrollTrigger
+   pins: nothing shifts (CLS 0) and nothing jumps when touch, keys or the scrollbar move the page */
+html.motion .scene { height: calc(100svh + var(--hold) + var(--fade)); pointer-events: none; }   /* boxes and stages overlap: only the hero's glass and the one link take the pointer */
+html.motion .scene + .scene { margin-top: calc(-100svh - var(--fade)); }
+html.motion .scene > .stage { position: sticky; inset: 0 auto auto; height: 100svh; }
 
 /* clips dissolve in over their still on the first real frame (core/clip.ts) */
 .clip { opacity: 0; transition: opacity .8s var(--ease); }
@@ -80,12 +82,11 @@ html.motion .static-only { display: none; }
 
 /* ---- the one switch: Motion · On/Off (the pause for every loop, the glass and the scrubs) ---- */
 .hdr { position: fixed; top: max(.5rem, env(safe-area-inset-top)); right: calc(var(--gutter) - .5rem); z-index: var(--z-header); }
-.hdr__motion { position: relative; isolation: isolate; display: inline-flex; align-items: center; gap: .55em; min-height: 44px; min-width: 44px; padding: 0 .5rem; border: 0; background: none;
-  color: var(--cream-dim); font: 600 var(--fs-label)/1 var(--f-hud); letter-spacing: .22em; text-transform: uppercase;
-  text-shadow: 0 1px 2px rgba(12, 7, 3, .9), 0 0 10px rgba(12, 7, 3, .7); }
-/* a soft pool of ink under the word (no fill, no bar): the switch rides over every frame, the lamps included, at ≥ 4.5:1 */
-.hdr__motion::before { content: ''; position: absolute; inset: -24px -44px; z-index: -1; pointer-events: none;   /* the word sits in the solid core; a long tail, so no oval edge shows */
-  background: radial-gradient(closest-side, rgba(12, 7, 3, .86) 50%, rgba(12, 7, 3, .38) 75%, rgba(12, 7, 3, 0)); }
+.hdr__motion { display: inline-flex; align-items: center; gap: .55em; min-height: 44px; min-width: 44px; padding: 0 .5rem; border: 0; background: none;
+  font: 600 var(--fs-label)/1 var(--f-hud); letter-spacing: .22em; text-transform: uppercase;
+  /* quiet until wanted: dim, no pool, no fill; a tight dark outline keeps it ≥ 4.5:1 over every frame, the rain-lit window included */
+  color: var(--cream-dim);
+  text-shadow: 0 0 2px rgba(12, 7, 3, .95), 0 0 2px rgba(12, 7, 3, .95), 0 1px 4px rgba(12, 7, 3, .8), 0 0 14px rgba(12, 7, 3, .55); }
 /* the state is drawn from aria-pressed, so "Motion" stays the accessible name */
 .hdr__motion::after { content: '· Off' / ''; }
 .hdr__motion[aria-pressed="true"]::after { content: '· On' / ''; }

@@ -1,5 +1,15 @@
 /* #fulton · the glass: the room through rain-beaded storefront glass; the title on the dark floor, never on the lit table. */
+.fulton { --hold: 100svh; }   /* ≥ a viewport: the next scene never starts inside the first view, so nothing shifts when motion turns on */
+/* the opening beat: the three shades come on and the gold leaf catches them. CSS, so the first paint is already dim (never
+   a flash) and the text is there from it (the LCP waits for nothing); the static branch skips it */
+@media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
+  html:not(.still) .fulton__stage { animation: lamps-on 1.2s var(--ease) both; }
+  html:not(.still) .leaf { animation: leaf-catch 1.6s var(--ease) .5s both; }
+}
+@keyframes lamps-on { from { filter: brightness(.35); } }
+@keyframes leaf-catch { from { background-position: 100% 0; } }
 
+.fulton__stage { pointer-events: auto; }   /* a finger on the glass (base.css turns the pointer off for scenes in motion) */
 .fulton__glass { opacity: 0; transition: opacity .8s var(--ease); }   /* fades in once the first second of draws proves the device fast enough */
 .fulton__glass[data-live] { opacity: 1; }
 .fulton__mist { position: absolute; inset: 0; pointer-events: none; transition: opacity .8s var(--ease);

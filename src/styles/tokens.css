@@ -24,6 +24,7 @@
   --gutter: clamp(16px, 2.5vw, 40px);
   --z-header: 40;
   --ease: cubic-bezier(.2, .7, .2, 1);                 /* 'house' in GSAP */
+  --fade: 35svh;                                       /* scene-to-scene dissolve (base.css); main.ts scrubs it to 'top -35%' */
   --focus-w: 2px; --focus-off: 3px;
   --focus-glow: 0 0 14px rgba(255, 74, 42, .45);
 }

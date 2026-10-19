@@ -14,6 +14,12 @@ const byId = new Map(Object.entries(mods).map(([path, m]) => [path.split('/')[2]
 // a matchMedia handler only runs while one of its conditions matches, so 'all' keeps this one running both ways
 gsap.matchMedia().add({ reduce: Q.reduce, all: 'all' }, (c) => { document.documentElement.classList.toggle('motion', !c.conditions!.reduce); });
 initAnchors(); initNav(); initClips();
+// one continuous shot (base.css): each scene dissolves in over the held frame before it, across --fade. Opacity, not
+// autoAlpha: a scene still to come stays in the accessibility tree
+gsap.matchMedia().add(Q.motion, () => {
+  for (const s of document.querySelectorAll('main > section + section')) gsap.fromTo(s.querySelector('.stage'), { opacity: 0 },
+    { opacity: 1, ease: 'none', scrollTrigger: { trigger: s, start: 'top top', end: 'top -35%', scrub: true } });
+});
 for (const el of document.querySelectorAll<HTMLElement>('main > section[id]')) byId.get(el.id)?.();   // DOM order
 document.fonts.ready.then(() => ScrollTrigger.refresh());
 if (new URLSearchParams(location.search).has('qa')) Object.assign(window, { __pj: { ScrollTrigger, lenis } });

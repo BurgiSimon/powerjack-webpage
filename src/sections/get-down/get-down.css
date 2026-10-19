@@ -1,7 +1,10 @@
-/* #get-down · the shot: down on the cue. The clip plays once in view; without it, three stills crane down onto cue-tip. */
-
+/* #get-down · the shot: down on the cue. The clip plays as the scene dissolves in; without it, three stills crane down onto cue-tip. */
+.get-down { --hold: 95svh; }
 .gd__stage:has(video) :is(.gd__crane, .gd__dim) { display: none; }   /* the crane frames never load when the clip exists */
 .gd__dim { position: absolute; inset: 0; background: var(--ink); opacity: .8; }
-.gd__copy { left: var(--gutter); bottom: 12svh; }
+/* on the empty cloth left of the bridge hand (phones: between the rack and the cue ball), never on the hand. The cloth is
+   dark enough for large text, so no ink pool here */
+.gd__copy { left: var(--gutter); top: 50%; }
+.gd__copy::before { content: none; }
 .gd__copy h2 { max-width: 14ch; }
-@media (max-width: 899.98px) { .gd__copy { bottom: 10svh; } }
+@media (max-aspect-ratio: 3/4) { .gd__copy { left: 50%; top: 47%; translate: -50% -50%; text-align: center; white-space: nowrap; } }

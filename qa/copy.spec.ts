@@ -19,7 +19,7 @@ test('copy guardrails on the built page', ({}, info) => {
   expect(hits).toEqual([]);
   for (const must of ['Powerjack', 'Thursday, 1:40 a.m. One table still lit.', 'In development', 'Just the cue.',
     'Don’t mind the cold spot. That’s just me.', 'Old Jack', 'Doors open soon.', 'Play Old Jack. Or a friend, online.',
-    'Frames and clips rendered by the game.']) expect(text).toContain(must);
+    'Game footage · effects added here']) expect(text).toContain(must);
 });
 
 test('the page says at most 40 words, and lists nothing', async ({ page }, info) => {

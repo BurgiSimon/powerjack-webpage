@@ -1,5 +1,5 @@
 /* The sign, and Old Jack. Layers bottom → top: lit still, unlit still, the wake (V5), his haze, the quote. */
-.sign { --pin: 30svh; }   /* room for the haze to rise and the wake to fire */
+.sign { --hold: 80svh; }   /* the dissolve, then room for the haze to rise and the wake to fire */
 .sg__media, .sg__wake { position: absolute; inset: 0; }
 .sg__media video { object-position: 48% 42%; }   /* the stills' focal (frames.json), so the clips land on them exactly */
 /* the game's own Jack haze (ai/ghost.ts), not a cigarette; rises from low left, where he would stand. The blur turns the

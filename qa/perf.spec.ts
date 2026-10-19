@@ -7,7 +7,7 @@ test('LCP is in the hero, CLS < .01, first view ≤ 1.5 MB', async ({ page }, in
   await page.addInitScript(() => {
     const w = window as any;
     w.__cls = 0; w.__lcp = null;
-    // pins are native sticky (base.css .pin), so every shift counts
+    // scenes hold by native sticky (base.css), not fixed pins, so every shift counts
     new PerformanceObserver((l) => { for (const e of l.getEntries() as any[]) if (!e.hadRecentInput) w.__cls += e.value; })
       .observe({ type: 'layout-shift', buffered: true });
     new PerformanceObserver((l) => { const e = l.getEntries().at(-1) as any; if (e) w.__lcp = e.element; }).observe({ type: 'largest-contentful-paint', buffered: true });
