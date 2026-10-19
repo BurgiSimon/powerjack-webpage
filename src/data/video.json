@@ -1,13 +1,13 @@
 {
  "bar-dolly": {
-  "w": 1280,
-  "h": 720,
+  "w": 1920,
+  "h": 1080,
   "fps": 24,
   "duration": 8,
   "loop": true,
   "files": {
-   "mp4": "media/video/bar-dolly-720.mp4",
-   "webm": "media/video/bar-dolly-720.webm"
+   "mp4": "media/video/bar-dolly-1080.mp4",
+   "webm": "media/video/bar-dolly-1080.webm"
   },
   "desc": "Real in-game render: the camera drifts from behind the bar out over the counter toward the lit table (POWERJACK neon, jukebox, three shades) and back; 8 s seamless loop."
  },

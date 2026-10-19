@@ -3,9 +3,11 @@
 .lc__media { position: absolute; inset: 0; }
 .lc__media video { object-position: 32% 47%; }   /* window-rain's focal (the still's, from frames.json) */
 /* the glass mirrors the bar's amber and read as grime: graded to a cold night (the still, its placeholder and the clip alike);
-   a colour blend keeps each pixel's light, so COLD BEER stays blue and the lightning turns cold */
+   a colour blend keeps each pixel's light, so COLD BEER stays blue and the lightning turns cold. Feathered off the left,
+   so the wall and sconce inside keep a trace of the tavern's warmth against the cold glass */
 .lc__media :is(img, video) { filter: saturate(.55) contrast(1.15) brightness(.95); }
-.lc__media::after { content: ''; position: absolute; inset: 0; background: #2A4FA0; mix-blend-mode: color; opacity: .5; }
+.lc__media::after { content: ''; position: absolute; inset: 0; background: #2A4FA0; mix-blend-mode: color; opacity: .3;
+  mask-image: linear-gradient(90deg, transparent 8%, #000 30%); }
 /* a portrait screen shows a quarter of the frame: keep the whole COLD BEER and the rain-lit pane in it (beats the inline focal) */
 @media (max-aspect-ratio: 3/4) { .lc__media :is(img, video) { object-position: 22% 50% !important; } }
 /* the frame's top corner is rain-lit glass that lightning flares: a film's corner vignette there keeps the Motion switch

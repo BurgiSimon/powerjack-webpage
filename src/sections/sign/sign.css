@@ -1,5 +1,5 @@
 /* The sign, and Old Jack. Layers bottom → top: lit still, unlit still, the wake (V5), the quote. */
-.sign { --hold: 80svh; }   /* the dissolve, the dark sign, the wake, then time to read him */
+.sign { --hold: 65svh; }   /* the dissolve, a beat of dark sign, the wake, then time to read him */
 .sg__media, .sg__wake { position: absolute; inset: 0; }
 .sg__media video { object-position: 48% 42%; }   /* the stills' focal (frames.json), so the clips land on them exactly */
 /* the quote sits on the dark wainscot right of the jukebox, never on its glow */

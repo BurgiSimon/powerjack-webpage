@@ -20,20 +20,20 @@ export const init: Init = () => {
     // its own dissolve → the end of its hold (base.css): it wakes once it is all there
     ScrollTrigger.create({ trigger: sec, start: 'top top', end: 'bottom 112%',
       onUpdate: (s) => {
-        if (!woken && s.progress >= .45) {
+        if (!woken && s.progress >= .25) {
           woken = true;
           if (wake) play(wake);
           if (!wake || wake.paused || wake.networkState === wake.NETWORK_NO_SOURCE) fade.play();
-        } else if (woken && s.progress < .4) {
+        } else if (woken && s.progress < .2) {
           woken = false;
           fade.reverse();
           if (wake) { wake.pause(); wake.currentTime = 0; wake.classList.remove('is-on'); }
         }
       } });
 
-    // with the wake (45 % of the hold)
-    reveal(q('.sg__quote p')!, 'top -38%', sec);
-    gsap.from(q('.sg__quote figcaption'), { opacity: 0, duration: .9, delay: .3, scrollTrigger: { trigger: sec, start: 'top -38%', once: true } });
+    // just after the wake
+    reveal(q('.sg__quote p')!, 'top -22%', sec);
+    gsap.from(q('.sg__quote figcaption'), { opacity: 0, duration: .9, delay: .3, scrollTrigger: { trigger: sec, start: 'top -22%', once: true } });
     // and leaves before the cut to last call
     gsap.to(q('.sg__quote'), { opacity: 0, ease: 'none', scrollTrigger: { trigger: '#last-call', start: 'top top', end: 'top -12%', scrub: true } });
     return () => src?.removeEventListener('error', failed);
