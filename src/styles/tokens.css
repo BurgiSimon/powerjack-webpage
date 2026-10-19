@@ -15,7 +15,7 @@
   --f-display: 'Fraunces Variable', 'Fraunces Fallback', Georgia, serif;          /* metric fallback: CLS 0 */
   --f-hud: 'Barlow Condensed', 'Barlow Fallback', 'Arial Narrow', sans-serif;
   --fs-mega:  clamp(3.75rem, 1rem + 9vw, 10rem);       /* h1 gold leaf, Fraunces 900, lh .92 */
-  --fs-h2:    clamp(2.75rem, 1.5rem + 5vw, 6.5rem);    /* Fraunces 800, lh 1 */
+  --fs-h2:    clamp(2.75rem, 1.5rem + 5vw, 6.5rem);    /* Fraunces 900, lh 1 (cream) */
   --fs-quote: clamp(1.6rem, 1.1rem + 2.2vw, 3.2rem);   /* Fraunces italic 400 */
   --fs-line:  clamp(1.125rem, .9rem + .9vw, 1.6rem);   /* Fraunces italic 400 */
   --fs-label: .8125rem;                                /* Barlow 600 caps .22em */

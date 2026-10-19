@@ -1,7 +1,11 @@
-/* Last call: inside, looking out at the rain. Two lines on the ledge, the credits at the foot. */
+/* Last call: inside, looking out at the rain. The name and two lines on the ledge, the credits at the foot. */
 .last-call { --hold: 50svh; }
 .lc__media { position: absolute; inset: 0; }
 .lc__media video { object-position: 32% 47%; }   /* window-rain's focal (the still's, from frames.json) */
+/* the glass mirrors the bar's amber and read as grime: graded to a cold night (the still, its placeholder and the clip alike);
+   a colour blend keeps each pixel's light, so COLD BEER stays blue and the lightning turns cold */
+.lc__media :is(img, video) { filter: saturate(.55) contrast(1.15) brightness(.95); }
+.lc__media::after { content: ''; position: absolute; inset: 0; background: #2A4FA0; mix-blend-mode: color; opacity: .5; }
 /* a portrait screen shows a quarter of the frame: keep the whole COLD BEER and the rain-lit pane in it (beats the inline focal) */
 @media (max-aspect-ratio: 3/4) { .lc__media :is(img, video) { object-position: 22% 50% !important; } }
 /* the frame's top corner is rain-lit glass that lightning flares: a film's corner vignette there keeps the Motion switch
@@ -12,6 +16,8 @@
 .lc__copy { left: 50%; bottom: max(14svh, 5.5rem); translate: -50% 0; width: min(100% - 2 * var(--gutter), 18ch); text-align: center;
   font-size: var(--fs-h2); }
 .lc__copy h2 { font-size: 1em; text-wrap: balance; }
+.lc__mark { width: fit-content; margin: -.12em auto 0; font-size: max(1.75rem, var(--fs-mega) / 3);   /* the hero's leaf, a third the size */
+  background-position: 50% 0; }   /* the foil's bright middle: ≥ 5.7:1 on the night glass, where its dark bronze end would not be */
 .lc__line { margin-top: .75rem; font: italic 400 var(--fs-line)/1.3 var(--f-display); color: var(--cream); text-wrap: balance; }
 .lc__foot { position: absolute; z-index: 3; left: 50%; bottom: calc(1.25rem + env(safe-area-inset-bottom)); translate: -50% 0;
   width: min(100% - 2 * var(--gutter), 64rem); text-align: center; text-wrap: balance;

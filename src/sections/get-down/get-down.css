@@ -7,4 +7,4 @@
 .gd__copy { left: var(--gutter); top: 50%; }
 .gd__copy::before { content: none; }
 .gd__copy h2 { max-width: 14ch; }
-@media (max-aspect-ratio: 3/4) { .gd__copy { left: 50%; top: 47%; translate: -50% -50%; text-align: center; white-space: nowrap; } }
+@media (max-aspect-ratio: 3/4) { .gd__copy { left: 50%; top: 50%; translate: -50% -50%; text-align: center; white-space: nowrap; } }

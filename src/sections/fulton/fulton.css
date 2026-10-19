@@ -4,7 +4,7 @@
    a flash) and the text is there from it (the LCP waits for nothing); the static branch skips it */
 @media (scripting: enabled) and (prefers-reduced-motion: no-preference) {
   html:not(.still) .fulton__stage { animation: lamps-on 1.2s var(--ease) both; }
-  html:not(.still) .leaf { animation: leaf-catch 1.6s var(--ease) .5s both; }
+  html:not(.still) .fulton .leaf { animation: leaf-catch 1.6s var(--ease) .5s both; }
 }
 @keyframes lamps-on { from { filter: brightness(.35); } }
 @keyframes leaf-catch { from { background-position: 100% 0; } }
@@ -24,16 +24,6 @@
 .fulton__title { --sink: 0vh; left: 50%; bottom: 9svh; translate: -50% var(--sink); display: grid; justify-items: center; width: max-content;
   max-width: calc(100vw - 2 * var(--gutter)); text-align: center; }
 
-/* gold leaf with a dark sign-painter keyline, so it holds over any frame (r0 storefront.css) */
-.leaf { margin: -.12em 0 -.3em; padding: .12em 0 .3em;   /* clip:text paints only inside the box: room for the j's tail */
-  font: 900 var(--fs-mega)/.92 var(--f-display); font-variation-settings: 'SOFT' 100; letter-spacing: -.015em;
-  background: var(--foil); background-size: 200% 100%; -webkit-background-clip: text; background-clip: text;
-  -webkit-text-fill-color: transparent; color: transparent; text-shadow: none;
-  /* the sign-painter's dark keyline as tight shadows: text-stroke would trace the variable font's overlapping contours */
-  filter: drop-shadow(0 0 .6px rgba(23, 17, 12, .95)) drop-shadow(0 0 1px rgba(23, 17, 12, .85)) drop-shadow(0 2px 6px rgba(12, 7, 3, .6)); }
-@media (forced-colors: active) {
-  .leaf { background: none; -webkit-text-fill-color: CanvasText; color: CanvasText; -webkit-text-stroke: 0; filter: none; }
-}
 .fulton__line { margin-top: calc(.5rem + .1 * var(--fs-mega));   /* .5rem under the j's tail */
   font: italic 400 var(--fs-line)/1.3 var(--f-display); color: var(--cream); }
 .fulton__dev { display: inline-flex; align-items: center; gap: .6em; margin-top: 1rem; color: var(--cream-dim);
