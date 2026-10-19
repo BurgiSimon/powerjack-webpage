@@ -1,0 +1,10 @@
+{
+  "extraKnownMarketplaces": {
+    "ponytail": { "source": { "source": "github", "repo": "DietrichGebert/ponytail" } },
+    "gsap-skills": { "source": { "source": "github", "repo": "greensock/gsap-skills" } }
+  },
+  "enabledPlugins": {
+    "ponytail@ponytail": true,
+    "gsap-skills@gsap-skills": true
+  }
+}
